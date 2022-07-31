@@ -5,15 +5,15 @@ import 'package:provider/provider.dart';
 
 import '../widgets/custom_button.dart';
 
-class ProfilePage extends StatelessWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+class StudentProfilePage extends StatelessWidget {
+  const StudentProfilePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final user = context.read<FirebaseAuthMethods>().user;
-    
+
     return Scaffold(
-      appBar: AppBar(title: const Text('Profile Page')),
+      appBar: AppBar(title: const Text('Student Profile Page')),
       body: Center(
         child: Column(children: [
           const SizedBox(height: 40),

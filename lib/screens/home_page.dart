@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../widgets/custom_button.dart';
-import 'lecturer_login.dart';
-import 'student_login.dart';
+import 'lecturer_login_page.dart';
+import 'student_login_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -15,24 +15,24 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Log in')),
+      appBar: AppBar(title: const Text('Log in')),
       body: Padding(
-        padding: EdgeInsets.only(top: 20),
+        padding: const EdgeInsets.only(top: 20),
         child: Center(
           child: Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Text(
                 'Choose corresponding position',
                 style: Theme.of(context).textTheme.headline2,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 30, vertical: 33),
+                margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 33),
                 child: Row(
                   children: [
                     Expanded(
@@ -43,22 +43,22 @@ class _HomePageState extends State<HomePage> {
                             'For Students',
                             style: Theme.of(context).textTheme.headline3,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 15,
                           ),
                           CustomButton(
                             onTap: () {
                               Navigator.pushNamed(
-                                  context, StudentLogin.routeName);
+                                  context, StudentLoginPage.routeName);
                             },
                             text: 'STUDENT',
                             icon: FontAwesomeIcons.graduationCap,
-                            iconColor: Color.fromARGB(255, 133, 173, 233),
+                            iconColor: const Color.fromARGB(255, 133, 173, 233),
                           ),
                         ],
                       ),
                     ),
-                    Expanded(flex: 1, child: SizedBox()),
+                    const Expanded(flex: 1, child: SizedBox()),
                     Expanded(
                       flex: 2,
                       child: Column(
@@ -67,13 +67,13 @@ class _HomePageState extends State<HomePage> {
                             'For Lecturers',
                             style: Theme.of(context).textTheme.headline3,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 15,
                           ),
                           CustomButton(
                             onTap: () {
                               Navigator.pushNamed(
-                                  context, LecturerLogin.routeName);
+                                  context, LecturerLoginPage.routeName);
                             },
                             text: 'LECTURER',
                             icon: FontAwesomeIcons.certificate,

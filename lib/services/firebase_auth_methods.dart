@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_lecon/services/who_is_user.dart';
 import '../utils/showSnackbar.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -34,27 +35,23 @@ class FirebaseAuthMethods {
             await _auth.signInWithPopup(googleProvider);
 
         var email = userCredential.user!.email;
-        bool isStudentEmail = RegExp(
-                r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@std.gau.edu.tr")
-            .hasMatch(email!);
-        bool isLecturerEmail =
-            RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@gau.edu.tr")
-                .hasMatch(email);
+        bool isUserStudent = isStudent(email!);
+        bool isUserLecturer = isLecturer(email);
         // THROW OUT IF IT ISNT LECTURER OF STUDENT;
-        if (!isStudentEmail || !isLecturerEmail) {
+        if (!isUserStudent && !isUserLecturer) {
           await signOut(context);
           await deleteAccount(context);
         }
         // CHECK NEW GUYS
         if (userCredential.user != null) {
           if (userCredential.additionalUserInfo!.isNewUser) {
-            if (isStudentEmail) {
+            if (isUserStudent) {
               FirebaseFirestore.instance.collection('users').add({
                 'email': userCredential.user!.email,
                 'name': userCredential.user!.displayName,
                 'isLecturer': false,
               });
-            } else if (isLecturerEmail) {
+            } else if (isUserLecturer) {
               FirebaseFirestore.instance.collection('users').add({
                 'email': userCredential.user!.email,
                 'name': userCredential.user!.displayName,
