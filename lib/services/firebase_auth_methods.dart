@@ -25,48 +25,42 @@ class FirebaseAuthMethods {
   // Stream get authState => FirebaseAuth.instance.idTokenChanges();
   // KNOW MORE ABOUT THEM HERE: https://firebase.flutter.dev/docs/auth/start#auth-state
 
-  // GOOGLE SIGN IN
-  Future<void> signInWithGoogle(BuildContext context) async {
+  Future signInWithGoogle(BuildContext context) async {
     try {
+      // GOOGLE SIGN IN THROUGH WEB
       if (kIsWeb) {
         GoogleAuthProvider googleProvider = GoogleAuthProvider();
 
         final UserCredential userCredential =
             await _auth.signInWithPopup(googleProvider);
 
-        var email = userCredential.user!.email;
-        bool isUserStudent = isStudent(email!);
-        bool isUserLecturer = isLecturer(email);
+        // var email = userCredential.user!.email;
+        // bool isUserStudent = isStudent(email!);
         // THROW OUT IF IT ISNT LECTURER OF STUDENT;
-        if (!isUserStudent && !isUserLecturer) {
-          await signOut(context);
-          await deleteAccount(context);
-        }
+        // if (!isUserStudent) {
+        //   await signOut(context);
+        //   await deleteAccount(context);
+        // }
         // CHECK NEW GUYS
         if (userCredential.user != null) {
           if (userCredential.additionalUserInfo!.isNewUser) {
-            if (isUserStudent) {
-              FirebaseFirestore.instance.collection('users').add({
-                'email': userCredential.user!.email,
-                'name': userCredential.user!.displayName,
-                'isLecturer': false,
-              });
-            } else if (isUserLecturer) {
-              FirebaseFirestore.instance.collection('users').add({
-                'email': userCredential.user!.email,
-                'name': userCredential.user!.displayName,
-                'isLecturer': true,
-              });
-            } else {
-              // TODO: THROW USER OUT AND DON'T ALLOW
-
-              // await signOut(context);
-            }
+            addUser(googleUser: userCredential);
           }
         }
+
+
+
+
+
+
+
+
+
+
+      // GOOGLE SIGN IN THROUGH IOS AND ANDROID DEVICES
       } else {
-        // IOS GOOGLE SIGN IN
-        // final GoogleSignInAccount? googleUser = await GoogleSignIn(clientId:DefaultFirebaseOptions.currentPlatform.iosClientId).signIn();
+        // IOS SIGN IN:      // final GoogleSignInAccount? googleUser = await GoogleSignIn(clientId:DefaultFirebaseOptions.currentPlatform.iosClientId).signIn();
+
         final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
         final GoogleSignInAuthentication? googleAuth =
@@ -115,5 +109,47 @@ class FirebaseAuthMethods {
       // if an error of requires-recent-login is thrown, make sure to log
       // in user again and then delete account.
     }
+  }
+
+  Future addUser({required UserCredential googleUser}) async {
+    final docTicket = FirebaseFirestore.instance.collection('users').doc();
+    // TODO: change uid to TEACHER UID
+    final user = UserInstance(
+        uid: googleUser.user!.uid,
+        email: googleUser.user!.email,
+        displayName: googleUser.user!.displayName,
+        photoURL: googleUser.user!.photoURL,
+        isLecturer: !isStudent(googleUser.user!.email));
+    final json = user.toJson();
+    await docTicket.set(json);
+  }
+}
+
+class UserInstance {
+  UserInstance({
+    required this.uid,
+    required this.email,
+    required this.displayName,
+    required this.photoURL,
+    required this.isLecturer,
+  });
+  final String? uid;
+  final String? email;
+  final String? displayName;
+  final String? photoURL;
+  final bool isLecturer;
+
+  Map<String, dynamic> toJson() {
+    return {
+      'uid': uid,
+      'email': email,
+      'DisplayName': displayName,
+      "PhotoURL": photoURL,
+      "isLecturer": isLecturer,
+    };
+  }
+
+  static UserInstance fromJson(Map<String, dynamic> json){
+    return UserInstance(uid: json['uid'], email: json['email'], displayName: json['displayName'], photoURL: json['photoURL'], isLecturer: json['isLecturer']);
   }
 }

@@ -6,12 +6,13 @@ import 'package:provider/provider.dart';
 import '../widgets/custom_button.dart';
 
 class LecturerProfilePage extends StatelessWidget {
+  static const routeName = '/lecturer-profile-page';
   const LecturerProfilePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final user = context.read<FirebaseAuthMethods>().user;
-    
+
     return Scaffold(
       appBar: AppBar(title: const Text('Lecturer Profile Page')),
       body: Center(
@@ -28,6 +29,7 @@ class LecturerProfilePage extends StatelessWidget {
           ),
           Text(user.displayName ?? ''),
           Text(user.email ?? ''),
+          Text(user.uid),
           const SizedBox(
             height: 16,
           ),

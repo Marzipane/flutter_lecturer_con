@@ -1,14 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_lecon/screens/home_page.dart';
-import 'package:flutter_lecon/screens/student_profile_page.dart';
 import 'package:flutter_lecon/services/firebase_auth_methods.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 import 'route_generator.dart';
 import 'package:firebase_core/firebase_core.dart';
-
-import 'screens/lecturer_profile_page.dart';
+import 'screens/lecturer_home_page.dart';
+import 'screens/login_page.dart';
+import 'screens/student_home_page.dart';
 import 'services/who_is_user.dart';
 
 void main() async {
@@ -48,18 +47,15 @@ class AuthWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final firebaseUser = context.watch<User?>();
-    var email = firebaseUser?.email;
+    String? email = firebaseUser?.email;
 
     if (firebaseUser != null) {
-      // CHECK IF IT'S A LECTURER
-      if (isLecturer(email!)) {
-        return const LecturerProfilePage();
+      if (isStudent(email!)) {
+        return StudentHomePage();
+      } else {
+        return LecturerHomePage();
       }
-      if (isStudent(email)) {
-        return const StudentProfilePage();
-      }
-
     }
-    return const HomePage();
+    return const LoginPage();
   }
 }

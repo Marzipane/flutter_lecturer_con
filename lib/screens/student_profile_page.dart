@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_lecon/screens/add_ticket_page.dart';
 import 'package:flutter_lecon/services/firebase_auth_methods.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
@@ -6,6 +7,7 @@ import 'package:provider/provider.dart';
 import '../widgets/custom_button.dart';
 
 class StudentProfilePage extends StatelessWidget {
+  static const routeName = '/student-profile-page';
   const StudentProfilePage({Key? key}) : super(key: key);
 
   @override
@@ -13,7 +15,15 @@ class StudentProfilePage extends StatelessWidget {
     final user = context.read<FirebaseAuthMethods>().user;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Student Profile Page')),
+      appBar: AppBar(
+        title: const Text('Student Profile Page'),
+        leading: IconButton(
+          icon: FaIcon(FontAwesomeIcons.plus),
+          onPressed: () {
+            Navigator.pushNamed(context, AddTicketPage.routeName);
+          },
+        ),
+      ),
       body: Center(
         child: Column(children: [
           const SizedBox(height: 40),
@@ -48,3 +58,7 @@ class StudentProfilePage extends StatelessWidget {
     );
   }
 }
+
+
+
+

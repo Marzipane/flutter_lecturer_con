@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../widgets/custom_button.dart';
-import 'lecturer_login_page.dart';
-import 'student_login_page.dart';
+import 'login_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -32,7 +31,8 @@ class _HomePageState extends State<HomePage> {
                 height: 10,
               ),
               Container(
-                margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 33),
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 30, vertical: 33),
                 child: Row(
                   children: [
                     Expanded(
@@ -48,8 +48,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                           CustomButton(
                             onTap: () {
-                              Navigator.pushNamed(
-                                  context, StudentLoginPage.routeName);
+                              Navigator.pushNamed(context, LoginPage.routeName);
                             },
                             text: 'STUDENT',
                             icon: FontAwesomeIcons.graduationCap,
@@ -69,14 +68,6 @@ class _HomePageState extends State<HomePage> {
                           ),
                           const SizedBox(
                             height: 15,
-                          ),
-                          CustomButton(
-                            onTap: () {
-                              Navigator.pushNamed(
-                                  context, LecturerLoginPage.routeName);
-                            },
-                            text: 'LECTURER',
-                            icon: FontAwesomeIcons.certificate,
                           ),
                         ],
                       ),
