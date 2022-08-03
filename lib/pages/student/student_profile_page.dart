@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_lecon/screens/add_ticket_page.dart';
 import 'package:flutter_lecon/services/firebase_auth_methods.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
-import '../widgets/custom_button.dart';
+import '../../pages/student/add_ticket_page.dart';
+import '../../widgets/custom_button.dart';
 
 class StudentProfilePage extends StatelessWidget {
   static const routeName = '/student-profile-page';

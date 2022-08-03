@@ -2,12 +2,12 @@ import 'dart:js';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_lecon/screens/student_profile_page.dart';
+import 'package:flutter_lecon/screens/student/student_profile_page.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import '../services/firebase_auth_methods.dart';
-import '../widgets/custom_button.dart';
-import '../widgets/google_login_button.dart';
+import '../../services/firebase_auth_methods.dart';
+import '../../widgets/custom_button.dart';
+import '../../widgets/google_login_button.dart';
 
 class LoginPage extends StatelessWidget {
   static const routeName = '/login-page';
