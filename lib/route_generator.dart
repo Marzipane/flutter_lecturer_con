@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_lecon/screens/add_ticket_page.dart';
-import 'package:flutter_lecon/screens/error_page.dart';
-import 'package:flutter_lecon/screens/lecturer_home_page.dart';
-import 'package:flutter_lecon/screens/reply_ticket_page.dart';
-import 'package:flutter_lecon/screens/student_home_page.dart';
-import 'package:flutter_lecon/screens/student_profile_page.dart';
-import 'screens/home_page.dart';
-import 'screens/lecturer_profile_page.dart';
-import 'screens/login_page.dart';
-import 'screens/error_page.dart';
+import 'package:flutter_lecon/screens/student/student_home_page.dart';
+import 'package:flutter_lecon/screens/student/student_profile_page.dart';
+import 'pages/general/error_page.dart';
+import 'pages/general/home_page.dart';
+import 'pages/lecturer/lecturer_home_page.dart';
+import 'pages/lecturer/reply_ticket_page.dart';
+import 'pages/student/add_ticket_page.dart';
+import 'screens/lecturer/lecturer_profile_page.dart';
+import 'screens/general/login_page.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -17,7 +16,6 @@ class RouteGenerator {
     } else if (settings.name == LoginPage.routeName) {
       return MaterialPageRoute(builder: (context) => const LoginPage());
     } else if (settings.name == AddTicketPage.routeName) {
-      // TODO: Give parameter.
       return MaterialPageRoute(
           builder: (context) => const AddTicketPage(), settings: settings);
     } else if (settings.name == StudentProfilePage.routeName) {

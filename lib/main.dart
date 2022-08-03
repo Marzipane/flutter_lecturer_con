@@ -5,9 +5,9 @@ import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 import 'route_generator.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'screens/lecturer_home_page.dart';
-import 'screens/login_page.dart';
-import 'screens/student_home_page.dart';
+import 'pages/lecturer/lecturer_home_page.dart';
+import 'screens/general/login_page.dart';
+import 'screens/student/student_home_page.dart';
 import 'services/who_is_user.dart';
 
 void main() async {

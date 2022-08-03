@@ -3,7 +3,7 @@ import 'package:flutter_lecon/services/firebase_auth_methods.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
-import '../widgets/custom_button.dart';
+import '../../widgets/custom_button.dart';
 
 class LecturerProfilePage extends StatelessWidget {
   static const routeName = '/lecturer-profile-page';

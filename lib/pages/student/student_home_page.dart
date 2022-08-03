@@ -1,9 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_lecon/screens/add_ticket_page.dart';
-
-import '../services/firebase_auth_methods.dart';
+import '../../pages/student/add_ticket_page.dart';
+import '../../services/firebase_auth_methods.dart';
 
 class StudentHomePage extends StatelessWidget {
   static const routeName = '/student-home-page';

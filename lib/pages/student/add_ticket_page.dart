@@ -1,14 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter_lecon/screens/login_page.dart';
-import 'package:flutter_lecon/screens/student_profile_page.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-
-import '../common/formatter.dart';
-import '../services/firebase_auth_methods.dart';
+import '../../models/ticket_model.dart';
+import '../../services/firebase_auth_methods.dart';
 import 'student_home_page.dart';
 
 class AddTicketPage extends StatefulWidget {
@@ -111,49 +105,7 @@ class _AddTicketPageState extends State<AddTicketPage> {
   }
 }
 
-class Ticket{
-  Ticket({
-    required this.title,
-    required this.description,
-    required this.id,
-    required this.studentUid,
-    required this.teacherUid,
-    this.status = "NR",
-    this.reply,
-  });
-  final String? id;
-  final String? title;
-  final String? description;
-  final String? studentUid;
-  final String? teacherUid;
-  final String? status;
-  final String? reply;
 
-
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'title': title,
-      'description': description,
-      "creator": studentUid,
-      "receiver": teacherUid,
-      "status": Formatters().formatStatus(status!),
-      "reply": reply ?? ""
-    };
-  }
-
-  static Ticket fromJson(Map<String, dynamic> json) {
-    return Ticket(
-        title: json['title'],
-        studentUid: json['creator'],
-        teacherUid: json['receiver'],
-        status: json['status'],
-        id: json['id'],
-        reply: json['reply'],
-        description: json['description']);
-  }
-}
 
 
 

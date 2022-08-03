@@ -1,16 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter_lecon/screens/login_page.dart';
-import 'package:flutter_lecon/screens/student_profile_page.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import '../../common/formatter.dart';
+import '../../models/ticket_model.dart';
+import '../../services/firebase_auth_methods.dart';
 
-import '../common/formatter.dart';
-import '../services/firebase_auth_methods.dart';
-import 'add_ticket_page.dart';
-import 'student_home_page.dart';
 
 class ReplyTicketPage extends StatefulWidget {
   static const routeName = '/reply-ticket-page';
