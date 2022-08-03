@@ -28,7 +28,7 @@ class RouteGenerator {
     } else if (settings.name == StudentHomePage.routeName) {
       return MaterialPageRoute(builder: (context) => const StudentHomePage());
     } else if (settings.name == LecturerHomePage.routeName) {
-      return MaterialPageRoute(builder: (context) => const LecturerHomePage());
+      return MaterialPageRoute(builder: (context) => LecturerHomePage());
     } else if (settings.name == ReplyTicketPage.routeName) {
       return MaterialPageRoute(
           builder: (context) => const ReplyTicketPage(), settings: settings);

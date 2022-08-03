@@ -55,7 +55,7 @@ class AuthWrapper extends StatelessWidget {
       if (isStudent(email!)) {
         return const StudentHomePage();
       } else {
-        return const LecturerHomePage();
+        return LecturerHomePage();
       }
     }
     return const LoginPage();
