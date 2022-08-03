@@ -4,9 +4,10 @@
 // import 'package:provider/provider.dart';
 // import '../../models/ticket_model.dart';
 // import '../../services/firebase_auth_methods.dart';
+// import '../pages/lecturer/reply_ticket_page.dart';
 // import 'lecturer_profile_page.dart';
 // import 'reply_ticket_page.dart';
-
+//
 // class LecturerHomePage extends StatelessWidget {
 //   static const routeName = '/lecturer-home-page';
 //   LecturerHomePage({Key? key}) : super(key: key);
@@ -44,7 +45,7 @@
 //       ),
 //     );
 //   }
-
+//
 //   Stream<List<Ticket>> readTickets({required user}) {
 //     return FirebaseFirestore.instance
 //         .collection('tickets')
@@ -53,11 +54,11 @@
 //         .map((snapshot) =>
 //             snapshot.docs.map((doc) => Ticket.fromJson(doc.data())).toList());
 //   }
-
+//
 //   Widget buildTicket(Ticket ticket) {
 //     var studentUid = ticket.studentUid;
 //     getStudent(studentUid: studentUid);
-
+//
 //     return Container(
 //         margin: const EdgeInsets.only(top: 15),
 //         padding: const EdgeInsets.all(23.0),
@@ -80,7 +81,7 @@
 //           ]),
 //         ));
 //   }
-
+//
 //   Future getStudent({studentUid}) async {
 //     var listok = await FirebaseFirestore.instance
 //         .collection('users')
@@ -92,11 +93,11 @@
 //     list.add(listok);
 //   }
 // }
-
+//
 // class ReplyButton extends StatelessWidget {
 //   const ReplyButton({Key? key, required this.ticket}) : super(key: key);
 //   final Ticket ticket;
-
+//
 //   @override
 //   Widget build(BuildContext context) {
 //     return ElevatedButton(
@@ -107,17 +108,3 @@
 //         child: const Text('Answer'));
 //   }
 // }
-
-// //  ListTile(
-// //         leading: Text(ticket.id ?? 'EMPTY'),
-// //         title: Column(children: [
-// //           Text(ticket.description ?? 'EMPTY'),
-// //           Text(ticket.title ?? 'EMPTY'),
-// //           Text(ticket.studentUid ?? 'EMPTY'),
-// //           Text(ticket.teacherUid ?? 'EMPTY'),
-// //           Text(ticket.status ?? 'EMPTY'),
-// //         ]),
-// //         trailing: ReplyButton(
-// //           ticket: ticket,
-// //         ),
-// //       ),

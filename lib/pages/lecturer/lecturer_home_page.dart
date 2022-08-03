@@ -4,16 +4,21 @@ import 'package:flutter_lecon/models/users_instance_model.dart';
 import 'package:provider/provider.dart';
 import '../../models/ticket_model.dart';
 import '../../services/firebase_auth_methods.dart';
+import 'firbase_read.dart';
 import 'lecturer_profile_page.dart';
 import 'reply_ticket_page.dart';
 
 class LecturerHomePage extends StatelessWidget {
   static const routeName = '/lecturer-home-page';
+
   LecturerHomePage({Key? key}) : super(key: key);
   List list = [];
+
   @override
   Widget build(BuildContext context) {
-    final user = context.read<FirebaseAuthMethods>().user;
+    final user = context
+        .read<FirebaseAuthMethods>()
+        .user;
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -29,15 +34,15 @@ class LecturerHomePage extends StatelessWidget {
             if (snapshot.hasData) {
               final tickets = snapshot.data!;
               return Center(
-                child: SizedBox(
+                  child: SizedBox(
                   width: 300,
                   child: Column(
-                    children: tickets.map(buildTicket).toList(),
-                  ),
-                ),
-              );
+                  children: tickets.map((ticket) => buildTicket(ticket, ticket.studentUid)).toList()
+            ),
+            ),
+            );
             } else {
-              return Center(child: Text(snapshot.toString()));
+            return Center(child: Text(snapshot.toString()));
             }
           },
         ),
@@ -51,13 +56,12 @@ class LecturerHomePage extends StatelessWidget {
         .where('receiver', isEqualTo: user.uid)
         .snapshots()
         .map((snapshot) =>
-            snapshot.docs.map((doc) => Ticket.fromJson(doc.data())).toList());
+        snapshot.docs.map((doc) => Ticket.fromJson(doc.data())).toList());
   }
 
-  Widget buildTicket(Ticket ticket) {
-    var studentUid = ticket.studentUid;
-    getStudent(studentUid: studentUid);
 
+
+  Widget buildTicket(Ticket ticket, studentUid) {
     return Container(
         margin: const EdgeInsets.only(top: 15),
         padding: const EdgeInsets.all(23.0),
@@ -66,31 +70,15 @@ class LecturerHomePage extends StatelessWidget {
             borderRadius: BorderRadius.circular(23.0)),
         child: Container(
           child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Text('From: getStudent(Ticket t)'),
-            FutureBuilder(
-                future: getStudent(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done) {
-                    return Text(list[0][0].email);
-                  }
-                  return CircularProgressIndicator();
-                }), // getStudent
+            buildStreamBuilder(studentUid),
             Center(child: Text('Button')),
           ]),
         ));
   }
 
-  Future getStudent({studentUid}) async {
-    var listok = await FirebaseFirestore.instance
-        .collection('users')
-        .where('uid', isEqualTo: studentUid)
-        .get()
-        .then((snapshot) => snapshot.docs
-            .map((doc) => UserInstance.fromJson(doc.data()))
-            .toList());
-    list.add(listok);
-  }
+
 }
 
 class ReplyButton extends StatelessWidget {
@@ -107,17 +95,3 @@ class ReplyButton extends StatelessWidget {
         child: const Text('Answer'));
   }
 }
-
-//  ListTile(
-//         leading: Text(ticket.id ?? 'EMPTY'),
-//         title: Column(children: [
-//           Text(ticket.description ?? 'EMPTY'),
-//           Text(ticket.title ?? 'EMPTY'),
-//           Text(ticket.studentUid ?? 'EMPTY'),
-//           Text(ticket.teacherUid ?? 'EMPTY'),
-//           Text(ticket.status ?? 'EMPTY'),
-//         ]),
-//         trailing: ReplyButton(
-//           ticket: ticket,
-//         ),
-//       ),
