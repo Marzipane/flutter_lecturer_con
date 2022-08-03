@@ -1,17 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../../models/ticket_model.dart';
 import '../../services/firebase_auth_methods.dart';
-import '../student/add_ticket_page.dart';
 import 'lecturer_profile_page.dart';
 import 'reply_ticket_page.dart';
 
 class LecturerHomePage extends StatelessWidget {
   static const routeName = '/lecturer-home-page';
-  LecturerHomePage({Key? key}) : super(key: key);
+  const LecturerHomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +53,7 @@ class LecturerHomePage extends StatelessWidget {
 
   Widget buildTicket(Ticket ticket) {
     return Container(
-      margin: EdgeInsets.only(top: 15),
+      margin: const EdgeInsets.only(top: 15),
       padding: const EdgeInsets.all(10.0),
       decoration: BoxDecoration(
           border: Border.all(color: Colors.black, width: 0.4),
@@ -89,6 +86,6 @@ class ReplyButton extends StatelessWidget {
           Navigator.pushNamed(context, ReplyTicketPage.routeName,
               arguments: {'ticket': ticket});
         },
-        child: Text('Answer'));
+        child: const Text('Answer'));
   }
 }

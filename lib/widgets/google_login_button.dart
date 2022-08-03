@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class GoogleLoginButton extends StatelessWidget {
   const GoogleLoginButton({Key? key, required this.onTap, required this.text})
@@ -12,13 +11,13 @@ class GoogleLoginButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.all(6),
+        padding: const EdgeInsets.all(6),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(25),
             border: Border.all(color: Colors.black, width: 0.4),
             // radius of 10
             color:
-                Color.fromARGB(41, 158, 158, 158) // green as background color
+                const Color.fromARGB(41, 158, 158, 158) // green as background color
             ),
         child: ListTile(
             title: Text(

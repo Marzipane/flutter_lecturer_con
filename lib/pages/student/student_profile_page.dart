@@ -18,7 +18,7 @@ class StudentProfilePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Student Profile Page'),
         leading: IconButton(
-          icon: FaIcon(FontAwesomeIcons.plus),
+          icon: const FaIcon(FontAwesomeIcons.plus),
           onPressed: () {
             Navigator.pushNamed(context, AddTicketPage.routeName);
           },

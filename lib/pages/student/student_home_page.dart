@@ -1,12 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import '../../models/users_instance_model.dart';
 import '../../pages/student/add_ticket_page.dart';
-import '../../services/firebase_auth_methods.dart';
 
 class StudentHomePage extends StatelessWidget {
   static const routeName = '/student-home-page';
-  StudentHomePage({Key? key}) : super(key: key);
+  const StudentHomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,14 +13,14 @@ class StudentHomePage extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.abc_rounded),
-          onPressed: () => print(readTeachers()),
+          onPressed: () => debugPrint(readTeachers().toString()),
         ),
       ),
       body: StreamBuilder<List<UserInstance>>(
         stream: readTeachers(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
-            return const Text('ERRRROOROR');
+            return const Text('Error');
           }
           if (snapshot.hasData) {
             final teachers = snapshot.data!;
@@ -44,7 +43,7 @@ class StudentHomePage extends StatelessWidget {
 
   Widget buildTeacher(UserInstance teacher) {
     return Container(
-      margin: EdgeInsets.only(top: 15),
+      margin: const EdgeInsets.only(top: 15),
       padding: const EdgeInsets.all(10.0),
       decoration: BoxDecoration(
           border: Border.all(color: Colors.black, width: 0.4),
@@ -75,7 +74,7 @@ class MyButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
         onPressed: () {
-          print(teacher.email);
+          debugPrint(teacher.email.toString());
           Navigator.popAndPushNamed(context, AddTicketPage.routeName,
               arguments: {'teacher': teacher});
         },

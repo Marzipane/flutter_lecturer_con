@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../models/ticket_model.dart';
+import '../../models/users_instance_model.dart';
 import '../../services/firebase_auth_methods.dart';
 import 'student_home_page.dart';
 
@@ -92,7 +93,6 @@ class _AddTicketPageState extends State<AddTicketPage> {
       required uid,
       required teacherUid}) async {
     final docTicket = FirebaseFirestore.instance.collection('tickets').doc();
-    // TODO: change uid to TEACHER UID
     final ticket = Ticket(
       title: title,
       description: desc,
