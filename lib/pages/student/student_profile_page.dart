@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_lecon/pages/general/login_page.dart';
 import 'package:flutter_lecon/services/firebase_auth_methods.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
@@ -45,7 +46,9 @@ class StudentProfilePage extends StatelessWidget {
             width: 300,
             child: CustomButton(
               onTap: () {
-                context.read<FirebaseAuthMethods>().signOut(context);
+                context.read<FirebaseAuthMethods>().signOut(context).then(
+                    (value) => Navigator.popAndPushNamed(
+                        context, LoginPage.routeName));
               },
               text: 'Sign Out',
               icon: FontAwesomeIcons.rightFromBracket,
@@ -58,7 +61,3 @@ class StudentProfilePage extends StatelessWidget {
     );
   }
 }
-
-
-
-

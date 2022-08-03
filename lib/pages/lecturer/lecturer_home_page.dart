@@ -18,26 +18,28 @@ class LecturerHomePage extends StatelessWidget {
         leading: IconButton(
           icon: const Icon(Icons.person),
           onPressed: () =>
-              Navigator.pushNamed(context, LecturerProfilePage.routeName),
+              Navigator.popAndPushNamed(context, LecturerProfilePage.routeName),
         ),
       ),
-      body: StreamBuilder<List<Ticket>>(
-        stream: readTickets(user: user),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            final tickets = snapshot.data!;
-            return Center(
-              child: SizedBox(
-                width: 500,
-                child: ListView(
-                  children: tickets.map(buildTicket).toList(),
+      body: SingleChildScrollView(
+        child: StreamBuilder<List<Ticket>>(
+          stream: readTickets(user: user),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              final tickets = snapshot.data!;
+              return Center(
+                child: SizedBox(
+                  width: 600,
+                  child: Column(
+                    children: tickets.map(buildTicket).toList(),
+                  ),
                 ),
-              ),
-            );
-          } else {
-            return Center(child: Text(snapshot.toString()));
-          }
-        },
+              );
+            } else {
+              return Center(child: Text(snapshot.toString()));
+            }
+          },
+        ),
       ),
     );
   }
@@ -53,25 +55,33 @@ class LecturerHomePage extends StatelessWidget {
 
   Widget buildTicket(Ticket ticket) {
     return Container(
-      margin: const EdgeInsets.only(top: 15),
-      padding: const EdgeInsets.all(10.0),
-      decoration: BoxDecoration(
-          border: Border.all(color: Colors.black, width: 0.4),
-          borderRadius: BorderRadius.circular(30.0)),
-      child: ListTile(
-        leading: Text(ticket.id ?? 'EMPTY'),
-        title: Column(children: [
-          Text(ticket.description ?? 'EMPTY'),
-          Text(ticket.title ?? 'EMPTY'),
-          Text(ticket.studentUid ?? 'EMPTY'),
-          Text(ticket.teacherUid ?? 'EMPTY'),
-          Text(ticket.status ?? 'EMPTY'),
-        ]),
-        trailing: ReplyButton(
-          ticket: ticket,
-        ),
-      ),
-    );
+        margin: const EdgeInsets.only(top: 15),
+        padding: const EdgeInsets.all(23.0),
+        decoration: BoxDecoration(
+            border: Border.all(color: Colors.black, width: 0.4),
+            borderRadius: BorderRadius.circular(23.0)),
+        child: Container(
+          child: Row(children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text('From: '),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text('Avatar'),
+                ],
+              ),
+            ),
+            Expanded(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[Text('Button')],
+              ),
+            )
+          ]),
+        ));
   }
 }
 
@@ -89,3 +99,17 @@ class ReplyButton extends StatelessWidget {
         child: const Text('Answer'));
   }
 }
+
+//  ListTile(
+//         leading: Text(ticket.id ?? 'EMPTY'),
+//         title: Column(children: [
+//           Text(ticket.description ?? 'EMPTY'),
+//           Text(ticket.title ?? 'EMPTY'),
+//           Text(ticket.studentUid ?? 'EMPTY'),
+//           Text(ticket.teacherUid ?? 'EMPTY'),
+//           Text(ticket.status ?? 'EMPTY'),
+//         ]),
+//         trailing: ReplyButton(
+//           ticket: ticket,
+//         ),
+//       ),

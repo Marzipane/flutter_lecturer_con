@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 import '../../widgets/custom_button.dart';
+import '../general/login_page.dart';
 
 class LecturerProfilePage extends StatelessWidget {
   static const routeName = '/lecturer-profile-page';
@@ -37,7 +38,9 @@ class LecturerProfilePage extends StatelessWidget {
             width: 300,
             child: CustomButton(
               onTap: () {
-                context.read<FirebaseAuthMethods>().signOut(context);
+                context.read<FirebaseAuthMethods>().signOut(context).then(
+                    (value) => Navigator.popAndPushNamed(
+                        context, LoginPage.routeName));
               },
               text: 'Sign Out',
               icon: FontAwesomeIcons.rightFromBracket,

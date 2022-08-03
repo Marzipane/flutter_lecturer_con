@@ -10,33 +10,30 @@ class StudentHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.abc_rounded),
-          onPressed: () => debugPrint(readTeachers().toString()),
-        ),
-      ),
-      body: StreamBuilder<List<UserInstance>>(
-        stream: readTeachers(),
-        builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            return const Text('Error');
-          }
-          if (snapshot.hasData) {
-            final teachers = snapshot.data!;
+      appBar: AppBar(),
+      body: SingleChildScrollView(
+        child: StreamBuilder<List<UserInstance>>(
+          stream: readTeachers(),
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              return const Text('Error');
+            }
+            if (snapshot.hasData) {
+              final teachers = snapshot.data!;
 
-            return Center(
-              child: SizedBox(
-                width: 500,
-                child: ListView(
-                  children: teachers.map(buildTeacher).toList(),
+              return Center(
+                child: SizedBox(
+                  width: 500,
+                  child: Column(
+                    children: teachers.map(buildTeacher).toList(),
+                  ),
                 ),
-              ),
-            );
-          } else {
-            return const Center(child: CircularProgressIndicator());
-          }
-        },
+              );
+            } else {
+              return const Center(child: CircularProgressIndicator());
+            }
+          },
+        ),
       ),
     );
   }
@@ -47,7 +44,7 @@ class StudentHomePage extends StatelessWidget {
       padding: const EdgeInsets.all(10.0),
       decoration: BoxDecoration(
           border: Border.all(color: Colors.black, width: 0.4),
-          borderRadius: BorderRadius.circular(30.0)),
+          borderRadius: BorderRadius.circular(23.0)),
       child: ListTile(
           leading: Text(teacher.email!),
           trailing: MyButton(
