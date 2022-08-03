@@ -38,7 +38,7 @@ class _ReplyTicketPageState extends State<ReplyTicketPage> {
                 Text('Description: ${ticket.description!}'),
                 TextFormField(
                   controller: _replyController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Reply',
                     hintText: 'Your reply ...',
                   ),

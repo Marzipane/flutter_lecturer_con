@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_lecon/services/who_is_user.dart';
-import '../utils/showSnackbar.dart';
+import '../models/users_instance_model.dart';
+import '../utils/show_snackbar.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -36,7 +37,7 @@ class FirebaseAuthMethods {
 
         // var email = userCredential.user!.email;
         // bool isUserStudent = isStudent(email!);
-        // THROW OUT IF IT ISNT LECTURER OF STUDENT;
+        // THROW OUT IF IT INST LECTURER OF STUDENT;
         // if (!isUserStudent) {
         //   await signOut(context);
         //   await deleteAccount(context);
@@ -80,10 +81,10 @@ class FirebaseAuthMethods {
           // only for new users using google sign in (since there are no two options
           // for google sign in and google sign up, only one as of now),
           // do the following:
-          // if (userCredential.user != null) {
-          //   if (userCredential.additionalUserInfo!.isNewUser) {
-          // }
-          // }
+          if (userCredential.user != null) {
+            if (userCredential.additionalUserInfo!.isNewUser) {
+          }
+          }
         }
       }
     } on FirebaseAuthException catch (e) {
@@ -125,31 +126,3 @@ class FirebaseAuthMethods {
   }
 }
 
-class UserInstance {
-  UserInstance({
-    required this.uid,
-    required this.email,
-    required this.displayName,
-    required this.photoURL,
-    required this.isLecturer,
-  });
-  final String? uid;
-  final String? email;
-  final String? displayName;
-  final String? photoURL;
-  final bool isLecturer;
-
-  Map<String, dynamic> toJson() {
-    return {
-      'uid': uid,
-      'email': email,
-      'DisplayName': displayName,
-      "PhotoURL": photoURL,
-      "isLecturer": isLecturer,
-    };
-  }
-
-  static UserInstance fromJson(Map<String, dynamic> json){
-    return UserInstance(uid: json['uid'], email: json['email'], displayName: json['displayName'], photoURL: json['photoURL'], isLecturer: json['isLecturer']);
-  }
-}

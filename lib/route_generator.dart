@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_lecon/screens/student/student_home_page.dart';
-import 'package:flutter_lecon/screens/student/student_profile_page.dart';
 import 'pages/general/error_page.dart';
 import 'pages/general/home_page.dart';
+import 'pages/general/login_page.dart';
 import 'pages/lecturer/lecturer_home_page.dart';
+import 'pages/lecturer/lecturer_profile_page.dart';
 import 'pages/lecturer/reply_ticket_page.dart';
 import 'pages/student/add_ticket_page.dart';
-import 'screens/lecturer/lecturer_profile_page.dart';
-import 'screens/general/login_page.dart';
+import 'pages/student/student_home_page.dart';
+import 'pages/student/student_profile_page.dart';
+
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -25,12 +26,12 @@ class RouteGenerator {
       return MaterialPageRoute(
           builder: (context) => const LecturerProfilePage());
     } else if (settings.name == StudentHomePage.routeName) {
-      return MaterialPageRoute(builder: (context) => StudentHomePage());
+      return MaterialPageRoute(builder: (context) => const StudentHomePage());
     } else if (settings.name == LecturerHomePage.routeName) {
-      return MaterialPageRoute(builder: (context) => LecturerHomePage());
+      return MaterialPageRoute(builder: (context) => const LecturerHomePage());
     } else if (settings.name == ReplyTicketPage.routeName) {
       return MaterialPageRoute(
-          builder: (context) => ReplyTicketPage(), settings: settings);
+          builder: (context) => const ReplyTicketPage(), settings: settings);
     }
     return MaterialPageRoute(builder: (context) => const ErrorPage());
   }
