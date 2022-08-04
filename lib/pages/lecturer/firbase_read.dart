@@ -10,8 +10,13 @@ StreamBuilder<List> buildStreamBuilder(studentUid) {
       if (snapshot.hasData) {
         final users = snapshot.data!;
         return Row(
-            children:
-                users.map((user) => Text('From: ${user.email}')).toList());
+          children: users
+              .map((user) => Text(
+                    'From: ${user.email}',
+                    style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic  ),
+                  ))
+              .toList(),
+        );
       } else {
         return const CircularProgressIndicator();
       }
