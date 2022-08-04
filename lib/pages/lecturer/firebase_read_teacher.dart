@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 
 import '../../models/users_instance_model.dart';
 
-StreamBuilder<List> buildStreamBuilder(studentUid) {
+StreamBuilder<List> buildTeacherStreamBuilder(teacherUid) {
   return StreamBuilder<List>(
-    stream: getStudent(uid: studentUid),
+    stream: getTeacher(uid: teacherUid),
     builder: (context, snapshot) {
       if (snapshot.hasData) {
         final users = snapshot.data!;
@@ -19,7 +19,7 @@ StreamBuilder<List> buildStreamBuilder(studentUid) {
   );
 }
 
-Stream<List> getStudent({required uid}) {
+Stream<List> getTeacher({required uid}) {
   return FirebaseFirestore.instance
       .collection('users')
       .where('uid', isEqualTo: uid)

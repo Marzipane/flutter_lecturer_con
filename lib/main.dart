@@ -30,14 +30,7 @@ void main() async {
       onGenerateRoute: RouteGenerator.generateRoute,
       theme: ThemeData(
           brightness: Brightness.light,
-          primaryColor: const Color.fromRGBO(0, 0, 128, 1.0)
-          // elevatedButtonTheme: ElevatedButtonThemeData(
-          //   style: ElevatedButton.styleFrom(
-          //       padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
-          //       textStyle:
-          //           const TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
-          // ),
-          ),
+          primaryColor: const Color.fromRGBO(0, 0, 128, 1.0)),
       home: const AuthWrapper(),
     ),
   ));
@@ -55,7 +48,7 @@ class AuthWrapper extends StatelessWidget {
       if (isStudent(email!)) {
         return LecturerHomePage();
       } else {
-        return const StudentHomePage();
+        return LecturerHomePage();
       }
     }
     return const LoginPage();
