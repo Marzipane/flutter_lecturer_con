@@ -16,7 +16,7 @@ class Ticket{
   final String? studentUid;
   final String? teacherUid;
   final String? status;
-  final String? reply;
+  String? reply;
 
 
 

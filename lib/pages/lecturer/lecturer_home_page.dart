@@ -16,9 +16,7 @@ class LecturerHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = context
-        .read<FirebaseAuthMethods>()
-        .user;
+    final user = context.read<FirebaseAuthMethods>().user;
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -34,15 +32,17 @@ class LecturerHomePage extends StatelessWidget {
             if (snapshot.hasData) {
               final tickets = snapshot.data!;
               return Center(
-                  child: SizedBox(
-                  width: 300,
+                child: SizedBox(
+                  width: 350,
                   child: Column(
-                  children: tickets.map((ticket) => buildTicket(ticket, ticket.studentUid)).toList()
-            ),
-            ),
-            );
+                      children: tickets
+                          .map((ticket) =>
+                              buildTicket(ticket, ticket.studentUid))
+                          .toList()),
+                ),
+              );
             } else {
-            return Center(child: Text(snapshot.toString()));
+              return Center(child: Text(snapshot.toString()));
             }
           },
         ),
@@ -56,29 +56,34 @@ class LecturerHomePage extends StatelessWidget {
         .where('receiver', isEqualTo: user.uid)
         .snapshots()
         .map((snapshot) =>
-        snapshot.docs.map((doc) => Ticket.fromJson(doc.data())).toList());
+            snapshot.docs.map((doc) => Ticket.fromJson(doc.data())).toList());
   }
-
-
 
   Widget buildTicket(Ticket ticket, studentUid) {
     return Container(
-        margin: const EdgeInsets.only(top: 15),
-        padding: const EdgeInsets.all(23.0),
-        decoration: BoxDecoration(
-            border: Border.all(color: Colors.black, width: 0.4),
-            borderRadius: BorderRadius.circular(23.0)),
-        child: Container(
-          child:
-          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text('From: getStudent(Ticket t)'),
-            buildStreamBuilder(studentUid),
-            Center(child: Text('Button')),
-          ]),
-        ));
+      margin: const EdgeInsets.only(top: 15),
+      padding: const EdgeInsets.all(20.0),
+      decoration: BoxDecoration(
+          border: Border.all(color: Colors.black, width: 0.4),
+          borderRadius: BorderRadius.circular(10.0)),
+      child: Container(
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          buildStreamBuilder(studentUid),
+          SizedBox(
+            height: 5,
+          ),
+          Text('Title: ${ticket.title}'),
+          Text(ticket.status.toString()),
+          SizedBox(
+            height: 5,
+          ),
+          Center(
+            child: ReplyButton(ticket: ticket),
+          ),
+        ]),
+      ),
+    );
   }
-
-
 }
 
 class ReplyButton extends StatelessWidget {
