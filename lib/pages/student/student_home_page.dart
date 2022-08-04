@@ -1,7 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_lecon/common/smtp.dart';
+import 'package:flutter_lecon/widgets/appbars.dart';
+import 'package:provider/provider.dart';
 import '../../models/users_instance_model.dart';
 import '../../pages/student/add_ticket_page.dart';
+import '../../services/firebase_auth_methods.dart';
 
 class StudentHomePage extends StatelessWidget {
   static const routeName = '/student-home-page';
@@ -9,8 +13,9 @@ class StudentHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = context.read<FirebaseAuthMethods>().user;
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBars().user(user, context),
       body: SingleChildScrollView(
         child: StreamBuilder<List<UserInstance>>(
           stream: readTeachers(),
@@ -71,8 +76,7 @@ class MyButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
         onPressed: () {
-          debugPrint(teacher.email.toString());
-          Navigator.popAndPushNamed(context, AddTicketPage.routeName,
+          Navigator.pushNamed(context, AddTicketPage.routeName,
               arguments: {'teacher': teacher});
         },
         child: const Text('Ask'));
