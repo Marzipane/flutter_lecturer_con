@@ -27,7 +27,7 @@ class _ReplyTicketPageState extends State<ReplyTicketPage> {
     updateStatus(ticket: ticket);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add Ticket'),
+        title: const Text('Reply Form'),
       ),
       body: Center(
         child: Column(
@@ -86,8 +86,18 @@ class _ReplyTicketPageState extends State<ReplyTicketPage> {
                         ),
                       ],
                     ),
+                    Divider(
+                      thickness: 2.0,
+                    ),
                     SizedBox(
                       height: 15,
+                    ),
+                    Text(
+                      'Your reply:',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    SizedBox(
+                      height: 5,
                     ),
                     TextFormField(
                       controller: _replyController,
@@ -137,10 +147,13 @@ class _ReplyTicketPageState extends State<ReplyTicketPage> {
                     Center(
                       child: ElevatedButton(
                           onPressed: () {
-                          
                             String reply = _replyController.text;
                             updateTicket(
-                                reply: reply, ticket: ticket, status: status).then((_) => Navigator.popAndPushNamed(context, LecturerHomePage.routeName));
+                                    reply: reply,
+                                    ticket: ticket,
+                                    status: status)
+                                .then((_) => Navigator.popAndPushNamed(
+                                    context, LecturerHomePage.routeName));
                           },
                           style: ElevatedButton.styleFrom(
                               padding: EdgeInsets.symmetric(

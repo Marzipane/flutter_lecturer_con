@@ -72,7 +72,7 @@ class LecturerHomePage extends StatelessWidget {
           SizedBox(
             height: 5,
           ),
-          Text('Title: ${ticket.title}'),
+          Text('Title: ${ticket.title}', style: TextStyle(fontSize: 18),),
           Text(ticket.status.toString()),
           SizedBox(
             height: 5,
