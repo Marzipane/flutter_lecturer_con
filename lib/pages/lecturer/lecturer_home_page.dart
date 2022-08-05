@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_lecon/models/users_instance_model.dart';
+import 'package:flutter_lecon/widgets/appbars.dart';
 import 'package:provider/provider.dart';
+import '../../common/app_theme.dart';
 import '../../models/ticket_model.dart';
 import '../../services/firebase_auth_methods.dart';
 import 'firbase_read.dart';
-import 'lecturer_profile_page.dart';
 import 'reply_ticket_page.dart';
 
 class LecturerHomePage extends StatelessWidget {
@@ -17,14 +17,9 @@ class LecturerHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = context.read<FirebaseAuthMethods>().user;
+    final auth = context.read<FirebaseAuthMethods>();
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.person),
-          onPressed: () =>
-              Navigator.popAndPushNamed(context, LecturerProfilePage.routeName),
-        ),
-      ),
+      appBar: AppBars().user(user: user, context: context, title: 'Lecturer Home Page', auth: auth),
       body: SingleChildScrollView(
         child: StreamBuilder<List<Ticket>>(
           stream: readTickets(user: user),
@@ -33,12 +28,15 @@ class LecturerHomePage extends StatelessWidget {
               final tickets = snapshot.data!;
               return Center(
                 child: SizedBox(
-                  width: 350,
-                  child: Column(
-                      children: tickets
-                          .map((ticket) =>
-                              buildTicket(ticket, ticket.studentUid))
-                          .toList()),
+                    width: MediaQuery.of(context).size.width * 0.7,
+                    child: Wrap(
+                        crossAxisAlignment: WrapCrossAlignment.start,
+                        alignment: WrapAlignment.spaceAround,
+                        runAlignment: WrapAlignment.center,
+                        children: tickets
+                            .map((ticket) =>
+                                buildTicket(ticket, ticket.studentUid))
+                            .toList()),
                 ),
               );
             } else {
@@ -61,14 +59,13 @@ class LecturerHomePage extends StatelessWidget {
 
   Widget buildTicket(Ticket ticket, studentUid) {
     return Container(
+      width: 350,
       margin: const EdgeInsets.only(top: 15),
       padding: const EdgeInsets.all(20.0),
-      decoration: BoxDecoration(
-          border: Border.all(color: Colors.black, width: 0.4),
-          borderRadius: BorderRadius.circular(10.0)),
-      child: Container(
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      decoration: AppBoxDecoration().all(),
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           buildStreamBuilder(studentUid),
+          Divider(),
           SizedBox(
             height: 5,
           ),
@@ -81,7 +78,6 @@ class LecturerHomePage extends StatelessWidget {
             child: ReplyButton(ticket: ticket),
           ),
         ]),
-      ),
     );
   }
 }

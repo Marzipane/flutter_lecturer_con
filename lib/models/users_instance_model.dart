@@ -23,6 +23,7 @@ class UserInstance {
   }
 
   static UserInstance fromJson(Map<String, dynamic> json){
-    return UserInstance(uid: json['uid'], email: json['email'], displayName: json['displayName'], photoURL: json['photoURL'], isLecturer: json['isLecturer']);
+    return UserInstance(uid: json['uid'], email: json['email'], displayName: json['DisplayName'], photoURL: json['PhotoURL'], isLecturer: json['isLecturer']);
   }
 }
+// todo : ДАНЯ ТЫ ДЯТЕЛ ЕБУЧИЙ. ЕСЛИ ТЫ В БАЗУ ДАННЫХ ОТПРАВЛЯЕШЬ С БОЛЬШОЙ БУКВЫ НАЗВАНИЕ, ПРИНИМАЙ СУКА ТОЖЕ С БОЛЬШОЙ БУКВЫ БЛЯТЬ !
