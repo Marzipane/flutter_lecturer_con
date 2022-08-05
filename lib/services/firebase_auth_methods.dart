@@ -121,7 +121,6 @@ class FirebaseAuthMethods {
 
   Future addUser({required UserCredential googleUser}) async {
     final docTicket = FirebaseFirestore.instance.collection('users').doc();
-    // TODO: change uid to TEACHER UID
     final user = UserInstance(
         uid: googleUser.user!.uid,
         email: googleUser.user!.email,
