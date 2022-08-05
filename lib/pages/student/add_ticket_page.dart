@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import '../../common/set_page_title.dart';
 import '../../models/ticket_model.dart';
 import '../../models/users_instance_model.dart';
 import '../../services/firebase_auth_methods.dart';
@@ -31,6 +32,7 @@ class _AddTicketPageState extends State<AddTicketPage> {
 
   @override
   Widget build(BuildContext context) {
+    setPageTitle('Student | Ticket', context);
     final user = context.read<FirebaseAuthMethods>().user;
     final args = (ModalRoute.of(context)?.settings.arguments) as Map;
     final UserInstance teacher = args['teacher'];

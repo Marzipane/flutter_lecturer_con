@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_lecon/common/set_page_title.dart';
 import 'package:flutter_lecon/widgets/appbars.dart';
 import 'package:provider/provider.dart';
 import '../../common/app_theme.dart';
@@ -7,6 +9,8 @@ import '../../models/ticket_model.dart';
 import '../../services/firebase_auth_methods.dart';
 import 'firbase_read.dart';
 import 'reply_ticket_page.dart';
+
+
 
 class LecturerHomePage extends StatelessWidget {
   static const routeName = '/lecturer-home-page';
@@ -16,6 +20,7 @@ class LecturerHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    setPageTitle('Lecturer | Home', context);
     final user = context.read<FirebaseAuthMethods>().user;
     final auth = context.read<FirebaseAuthMethods>();
     return Scaffold(
