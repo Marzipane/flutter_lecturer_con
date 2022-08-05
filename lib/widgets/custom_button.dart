@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_lecon/common/app_theme.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CustomButton extends StatelessWidget {
@@ -21,11 +22,11 @@ class CustomButton extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(6),
         decoration: BoxDecoration(
-          border: Border.all(color: Colors.black, width: 0.4),
-            borderRadius: BorderRadius.circular(25),
+          border: Border.all(color: AppColors.Secondary1, width: 0.4),
+            borderRadius: BorderRadius.circular(10),
             // radius of 10
             color:
-                const Color.fromARGB(41, 158, 158, 158) // green as background color
+                AppColors.LightGold
             ),
         child: ListTile(
           title: Text(

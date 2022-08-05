@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_lecon/common/app_theme.dart';
 import 'package:flutter_lecon/services/firebase_auth_methods.dart';
 import 'package:provider/provider.dart';
 import 'package:url_strategy/url_strategy.dart';
@@ -28,9 +29,7 @@ void main() async {
     ],
     child: MaterialApp(
       onGenerateRoute: RouteGenerator.generateRoute,
-      theme: ThemeData(
-          brightness: Brightness.light,
-          primaryColor: const Color.fromRGBO(0, 0, 128, 1.0)),
+      theme: AppTheme(),
       home: const AuthWrapper(),
     ),
   ));

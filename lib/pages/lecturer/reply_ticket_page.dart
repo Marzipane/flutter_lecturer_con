@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_lecon/pages/lecturer/lecturer_home_page.dart';
+import 'package:flutter_lecon/widgets/appbars.dart';
 import 'package:provider/provider.dart';
 import '../../common/formatter.dart';
 import '../../models/ticket_model.dart';
@@ -22,13 +23,12 @@ class _ReplyTicketPageState extends State<ReplyTicketPage> {
   @override
   Widget build(BuildContext context) {
     final user = context.read<FirebaseAuthMethods>().user;
+    final auth = context.read<FirebaseAuthMethods>();
     final args = (ModalRoute.of(context)?.settings.arguments) as Map;
     final Ticket ticket = args['ticket'];
     updateStatus(ticket: ticket);
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Reply Form'),
-      ),
+      appBar: AppBars().user(user: user, context: context, title: 'Reply form', auth: auth),
       body: Center(
         child: Column(
           children: [
@@ -104,15 +104,6 @@ class _ReplyTicketPageState extends State<ReplyTicketPage> {
                       decoration: const InputDecoration(
                           labelText: 'Reply',
                           hintText: 'Your reply ...',
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10.0)),
-                              borderSide: BorderSide(color: Colors.grey)),
-                          // when the field is in focus
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10.0)),
-                              borderSide: BorderSide(color: Colors.black)),
                           isDense: true,
                           contentPadding: EdgeInsets.all(20) // Added this
                           ),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../common/app_theme.dart';
+
 class GoogleLoginButton extends StatelessWidget {
   const GoogleLoginButton({Key? key, required this.onTap, required this.text})
       : super(key: key);
@@ -12,13 +14,7 @@ class GoogleLoginButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.all(6),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(25),
-            border: Border.all(color: Colors.black, width: 0.4),
-            // radius of 10
-            color:
-                const Color.fromARGB(41, 158, 158, 158) // green as background color
-            ),
+        decoration: AppBoxDecoration().all(),
         child: ListTile(
             title: Text(
               text,
