@@ -1,23 +1,26 @@
 import 'package:flutter/material.dart';
-
-import '../pages/lecturer/lecturer_profile_page.dart';
+import 'package:flutter_lecon/services/firebase_auth_methods.dart';
+import '../pages/general/login_page.dart';
+import '../pages/general/profile_page.dart';
 
 class AppBars {
-  double toolbarHeight = 44.0;
-
-  AppBar user(user,context) {
+  AppBar user({required user, required context, required title ,required auth}) {
     var choices = ['Profile', 'Log out'];
     return AppBar(
-      leadingWidth: 74,
+      leadingWidth: 200,
       automaticallyImplyLeading: false,
-      toolbarHeight: toolbarHeight,
-      leading: Padding(
-        padding: EdgeInsets.only(left: 16),
-        child: Image.network(
-            'https://www.gau.edu.tr/template/gau/img/gau_logo_en.png'),
+      leading: Row(
+        children: [
+          Padding(
+            padding: EdgeInsets.only(left: 16),
+            child: Image.network(
+                'https://www.gau.edu.tr/template/gau/img/gau_logo_en.png'),
+          ),
+        ],
       ),
-      title: Text('Home page'),
+      title: Text(title),
       actions: [
+        IconButton(onPressed: () => Navigator.popAndPushNamed(context, '/'), icon: Icon(Icons.home_rounded)),
         Padding(
           padding: EdgeInsets.only(right: 16),
           child: PopupMenuButton<String>(
@@ -30,10 +33,12 @@ class AppBars {
             onSelected: (String result) {
               switch (result) {
                 case 'profile':
-                  Navigator.pushNamed(context, LecturerProfilePage.routeName);
+                  Navigator.pushNamed(context, ProfilePage.routeName);
                   break;
                 case 'logout':
-                  print('filter 2 clicked');
+                    auth.signOut(context).then(
+                            (value) => Navigator.popAndPushNamed(
+                            context, LoginPage.routeName));
                   break;
                 default:
               }
@@ -58,7 +63,6 @@ class AppBars {
           ),
         ),
       ],
-      elevation: 0.0,
     );
   }
 }

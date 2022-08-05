@@ -5,7 +5,7 @@
 // import '../../models/ticket_model.dart';
 // import '../../services/firebase_auth_methods.dart';
 // import '../pages/lecturer/reply_ticket_page.dart';
-// import 'lecturer_profile_page.dart';
+// import 'profile_page.dart';
 // import 'reply_ticket_page.dart';
 //
 // class LecturerHomePage extends StatelessWidget {

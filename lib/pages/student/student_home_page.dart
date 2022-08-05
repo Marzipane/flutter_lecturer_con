@@ -11,11 +11,15 @@ class StudentHomePage extends StatelessWidget {
   static const routeName = '/student-home-page';
   const StudentHomePage({Key? key}) : super(key: key);
 
+
+
+
   @override
   Widget build(BuildContext context) {
     final user = context.read<FirebaseAuthMethods>().user;
+    final auth = context.read<FirebaseAuthMethods>();
     return Scaffold(
-      appBar: AppBars().user(user, context),
+      appBar: AppBars().user(user: user, context: context, title: 'Home page', auth: auth),
       body: SingleChildScrollView(
         child: StreamBuilder<List<UserInstance>>(
           stream: readTeachers(),
