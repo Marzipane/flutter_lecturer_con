@@ -1,11 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_lecon/common/app_theme.dart';
 
 import '../../models/users_instance_model.dart';
 
 StreamBuilder<List> buildStreamBuilder(studentUid) {
-  return StreamBuilder<List>(
+  return StreamBuilder<List<UserInstance>>(
     stream: getStudent(uid: studentUid),
     builder: (context, snapshot) {
       if (snapshot.hasData) {
@@ -17,9 +16,9 @@ StreamBuilder<List> buildStreamBuilder(studentUid) {
                 child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-            Image.network(user.photoURL),
-            Text('${user.displayName}', style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic  ),),
-            Text('${user.email}', style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic  ),),
+            // Image.network(user.photoURL! ?? 'Not found'),
+            Text(user.displayName ?? 'Not found', style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic  ),),
+            Text(user.email ?? 'Not found', style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic  ),),
           ],),
               ))
               .toList()
@@ -31,7 +30,7 @@ StreamBuilder<List> buildStreamBuilder(studentUid) {
   );
 }
 
-Stream<List> getStudent({required uid}) {
+Stream<List<UserInstance>> getStudent({required uid}) {
   return FirebaseFirestore.instance
       .collection('users')
       .where('uid', isEqualTo: uid)
