@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_lecon/common/smtp.dart';
 import 'package:flutter_lecon/widgets/appbars.dart';
 import 'package:provider/provider.dart';
+import '../../common/set_page_title.dart';
 import '../../models/users_instance_model.dart';
 import '../../pages/student/add_ticket_page.dart';
 import '../../services/firebase_auth_methods.dart';
@@ -16,6 +17,7 @@ class StudentHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    setPageTitle('Student | Home', context);
     final user = context.read<FirebaseAuthMethods>().user;
     final auth = context.read<FirebaseAuthMethods>();
     return Scaffold(

@@ -5,6 +5,7 @@ import 'package:flutter_lecon/pages/lecturer/lecturer_home_page.dart';
 import 'package:flutter_lecon/widgets/appbars.dart';
 import 'package:provider/provider.dart';
 import '../../common/formatter.dart';
+import '../../common/set_page_title.dart';
 import '../../models/ticket_model.dart';
 import '../../services/firebase_auth_methods.dart';
 import 'firbase_read.dart';
@@ -22,6 +23,7 @@ class _ReplyTicketPageState extends State<ReplyTicketPage> {
   String status = 'E';
   @override
   Widget build(BuildContext context) {
+    setPageTitle('Lecturer | Reply', context);
     final user = context.read<FirebaseAuthMethods>().user;
     final auth = context.read<FirebaseAuthMethods>();
     final args = (ModalRoute.of(context)?.settings.arguments) as Map;

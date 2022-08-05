@@ -5,6 +5,7 @@ import 'package:flutter_lecon/widgets/appbars.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
+import '../../common/set_page_title.dart';
 import '../../widgets/custom_button.dart';
 import 'login_page.dart';
 
@@ -14,6 +15,7 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    setPageTitle('Profile', context);
     final user = context.read<FirebaseAuthMethods>().user;
     final auth = context.read<FirebaseAuthMethods>();
 

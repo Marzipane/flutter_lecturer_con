@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../common/set_page_title.dart';
 import '../../services/firebase_auth_methods.dart';
 import '../../widgets/google_login_button.dart';
 
@@ -8,6 +9,7 @@ class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    setPageTitle('Login', context);
     return Scaffold(
       appBar: AppBar(title: const Text('Sign-in'),
         automaticallyImplyLeading: false,
@@ -31,7 +33,7 @@ class LoginPage extends StatelessWidget {
                 onTap: () {
                   context.read<FirebaseAuthMethods>().signInWithGoogle(context);
                 },
-                text: 'Sign in using google',
+                text: 'Sign in using Google',
               ),
             ),
           ],

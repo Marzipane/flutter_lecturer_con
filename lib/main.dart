@@ -45,7 +45,7 @@ class AuthWrapper extends StatelessWidget {
 
     if (firebaseUser != null) {
       if (isStudent(email!)) {
-        return LecturerHomePage();
+        return StudentHomePage();
       } else {
         return LecturerHomePage();
       }
