@@ -164,9 +164,9 @@ class _ReplyTicketPageState extends State<ReplyTicketPage> {
                               return Formatters().formatStatus(statusValue);
                             }())),
                             onTap: () {
+                              String reply = _replyController.text;
                               if (statusValue == 'A') {
                                 if (formKey.currentState!.validate()) {
-                                  String reply = _replyController.text;
                                   updateTicket(
                                           reply: reply,
                                           ticket: ticket,
@@ -174,14 +174,17 @@ class _ReplyTicketPageState extends State<ReplyTicketPage> {
                                       .then((_) => Navigator.popAndPushNamed(
                                           context, LecturerHomePage.routeName));
                                 }
-                              } else if (statusValue == "D" ||
-                                  statusValue == "E") {
+                              } else if (statusValue == "D") {
                                 updateTicket(
-                                        reply: "",
-                                        ticket: ticket,
-                                        status: statusValue)
+                                        ticket: ticket, status: statusValue)
                                     .then((_) => Navigator.pushNamed(
                                         context, LecturerHomePage.routeName));
+                              }
+                              else if(statusValue == "E"){
+                                updateTicket(
+                                    ticket: ticket, status: statusValue, reply: reply)
+                                    .then((_) => Navigator.pushNamed(
+                                    context, LecturerHomePage.routeName));
                               }
                             },
                           );
@@ -200,11 +203,9 @@ class _ReplyTicketPageState extends State<ReplyTicketPage> {
   //   return
   // }
 
-  Future updateTicket(
-      {required reply, required ticket, required status}) async {
+  Future updateTicket({reply="", required ticket, required status}) async {
     final docTicket =
         FirebaseFirestore.instance.collection('tickets').doc(ticket.id);
-    print(status);
     docTicket
         .update({'status': Formatters().formatStatus(status), 'reply': reply});
   }

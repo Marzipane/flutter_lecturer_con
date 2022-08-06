@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_lecon/common/set_page_title.dart';
+import 'package:flutter_lecon/pages/lecturer/ticket_history_page.dart';
 import 'package:flutter_lecon/widgets/appbars.dart';
 import 'package:provider/provider.dart';
 import '../../common/app_theme.dart';
@@ -26,28 +27,34 @@ class LecturerHomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBars().user(user: user, context: context, title: 'Lecturer Home Page', auth: auth),
       body: SingleChildScrollView(
-        child: StreamBuilder<List<Ticket>>(
-          stream: readTickets(user: user),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              final tickets = snapshot.data!;
-              return Center(
-                child: SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.7,
-                    child: Wrap(
-                        crossAxisAlignment: WrapCrossAlignment.start,
-                        alignment: WrapAlignment.spaceAround,
-                        runAlignment: WrapAlignment.center,
-                        children: tickets
-                            .map((ticket) =>
-                                buildTicket(ticket, ticket.studentUid))
-                            .toList()),
-                ),
-              );
-            } else {
-              return Center(child: Text(snapshot.toString()));
-            }
-          },
+        child: Column(
+          children: [
+            SizedBox(height: 10,),
+            ElevatedButton(onPressed: (){Navigator.pushNamed(context, TicketHistoryPage.routeName);}, child: Text ('Recent Tickets')),
+            StreamBuilder<List<Ticket>>(
+              stream: readTickets(user: user),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  final tickets = snapshot.data!;
+                  return Center(
+                    child: SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.7,
+                        child: Wrap(
+                            crossAxisAlignment: WrapCrossAlignment.start,
+                            alignment: WrapAlignment.spaceAround,
+                            runAlignment: WrapAlignment.center,
+                            children: tickets
+                                .map((ticket) =>
+                                    buildTicket(ticket, ticket.studentUid))
+                                .toList()),
+                    ),
+                  );
+                } else {
+                  return Center(child: Text(snapshot.toString()));
+                }
+              },
+            ),
+          ],
         ),
       ),
     );
@@ -57,6 +64,7 @@ class LecturerHomePage extends StatelessWidget {
     return FirebaseFirestore.instance
         .collection('tickets')
         .where('receiver', isEqualTo: user.uid)
+        .where('status' , whereIn: ['Evaluated', 'Not read yet'])
         .snapshots()
         .map((snapshot) =>
             snapshot.docs.map((doc) => Ticket.fromJson(doc.data())).toList());
