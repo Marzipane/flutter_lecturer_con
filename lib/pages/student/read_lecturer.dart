@@ -10,18 +10,34 @@ StreamBuilder<List> buildLecturerStreamBuilder(teacherUid) {
       if (snapshot.hasData) {
         final users = snapshot.data!;
         return Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: users
               .map((user) => Center(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                // Text(user.displayName ?? 'Not found', style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic  ),),
-                Text(user.email ?? 'Not found', style: TextStyle(fontSize: 16),),
-              ],),
-          ))
-              .toList()
-          ,);
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        // Text(user.displayName ?? 'Not found', style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic  ),),
+                        Row(
+                          children: [
+                            Text(
+                              'To: ',
+                              style: TextStyle(
+                                fontSize: 16,
+                                // decoration: TextDecoration.underline,
+                                fontWeight: FontWeight.bold
+                              ),
+                            ),
+                            Text(
+                              '@${user.displayName}',
+                              style: TextStyle(fontSize: 14),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ))
+              .toList(),
+        );
       } else {
         return const CircularProgressIndicator();
       }
@@ -35,7 +51,6 @@ Stream<List<UserInstance>> getLecturer({required uid}) {
       .where('uid', isEqualTo: uid)
       .snapshots()
       .map((snapshot) => snapshot.docs
-      .map((doc) => UserInstance.fromJson(doc.data()))
-      .toList());
+          .map((doc) => UserInstance.fromJson(doc.data()))
+          .toList());
 }
-

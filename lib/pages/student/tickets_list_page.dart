@@ -22,10 +22,7 @@ class TicketsListPage extends StatelessWidget {
     final auth = context.read<FirebaseAuthMethods>();
     return Scaffold(
       appBar: AppBars().user(
-          user: user,
-          context: context,
-          title: 'Tickets List Page',
-          auth: auth),
+          user: user, context: context, title: 'Tickets List Page', auth: auth),
       body: SingleChildScrollView(
         child: StreamBuilder<List<Ticket>>(
           stream: readStudentTickets(user: user),
@@ -74,15 +71,38 @@ class TicketsListPage extends StatelessWidget {
         SizedBox(
           height: 5,
         ),
-        Text(
-          'Title: ${ticket.title ?? 'Null'}',
-          style: TextStyle(fontSize: 18),
+        Row(
+          children: [
+            Text(
+              'Title: ',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+            Text(
+              ticket.title ?? 'Null',
+              style: TextStyle(fontSize: 14),
+            )
+          ],
         ),
-        Text(
-          'Description: ${ticket.description ?? 'Null'}',
-          style: TextStyle(fontSize: 18),
+        SizedBox(
+          height: 5,
         ),
-        Text(ticket.status.toString()),
+        Row(
+          children: [
+            Text(
+              'Description: ',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+            Text(
+              ticket.description ?? 'Null',
+              style: TextStyle(fontSize: 14),
+            )
+          ],
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Divider(thickness: 2,),
+        Center(child: Text('${ticket.status}')),
         SizedBox(
           height: 5,
         ),

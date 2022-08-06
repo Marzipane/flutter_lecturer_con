@@ -174,12 +174,9 @@ class _ReplyTicketPageState extends State<ReplyTicketPage> {
                                       .then((_) => Navigator.popAndPushNamed(
                                           context, LecturerHomePage.routeName));
                                 }
-                              } else if (statusValue == "D" ||
-                                  statusValue == "E") {
+                              } else if (statusValue == "D") {
                                 updateTicket(
-                                        reply: "",
-                                        ticket: ticket,
-                                        status: statusValue)
+                                        ticket: ticket, status: statusValue)
                                     .then((_) => Navigator.pushNamed(
                                         context, LecturerHomePage.routeName));
                               }
@@ -200,8 +197,7 @@ class _ReplyTicketPageState extends State<ReplyTicketPage> {
   //   return
   // }
 
-  Future updateTicket(
-      {required reply, required ticket, required status}) async {
+  Future updateTicket({reply, required ticket, required status}) async {
     final docTicket =
         FirebaseFirestore.instance.collection('tickets').doc(ticket.id);
     print(status);
