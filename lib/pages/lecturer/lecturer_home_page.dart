@@ -64,7 +64,7 @@ class LecturerHomePage extends StatelessWidget {
     return FirebaseFirestore.instance
         .collection('tickets')
         .where('receiver', isEqualTo: user.uid)
-        .where('status' , whereIn: ['Evaluated', 'Not Read Yet'])
+        .where('status' , whereIn: ['Evaluated', 'Not read yet'])
         .snapshots()
         .map((snapshot) =>
             snapshot.docs.map((doc) => Ticket.fromJson(doc.data())).toList());

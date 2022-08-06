@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_lecon/common/app_theme.dart';
-import 'package:flutter_lecon/pages/lecturer/ticket_history_page.dart';
-import 'package:flutter_lecon/pages/student/tickets_list_page.dart';
+import 'package:flutter_lecon/pages/student/add_student_number_page.dart';
+import 'package:flutter_lecon/pages/student/student_home_page.dart';
 import 'package:flutter_lecon/services/firebase_auth_methods.dart';
 import 'package:provider/provider.dart';
 import 'package:url_strategy/url_strategy.dart';
@@ -12,7 +12,6 @@ import 'pages/general/login_page.dart';
 import 'route_generator.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'pages/lecturer/lecturer_home_page.dart';
-import 'services/who_is_user.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -42,50 +41,47 @@ class AuthWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    CollectionReference users = FirebaseFirestore.instance.collection('users');
     final firebaseUser = context.watch<User?>();
     String? email = firebaseUser?.email;
 
     if (firebaseUser != null) {
-      if (isStudent(email!)) {
-        return TicketsListPage();
-      } else {
-        return LecturerHomePage();
-      }
+      return FutureBuilder(
+          future: users.doc(firebaseUser.uid).get(),
+          builder:
+              (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+            if (snapshot.hasError) {
+              return Text("Something went wrong");
+            }
+
+            if (snapshot.hasData && !snapshot.data!.exists) {
+              return Text("Document does not exist");
+            }
+
+            if (snapshot.connectionState == ConnectionState.done) {
+              Map<String, dynamic> data =
+                  snapshot.data!.data() as Map<String, dynamic>;
+              if (firebaseUser.uid == data['uid']) {
+                if (data['isLecturer'] == true) {
+                  return LecturerHomePage();
+                } else {
+                  if (data['studentNumber'] == null) {
+                    return AddStudentNumberPage(docId: firebaseUser.uid,);
+                  }
+                  else{
+                    return StudentHomePage();
+                  }
+                }
+              }
+            }
+            return Scaffold(
+              body: Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
+          });
     }
     return const LoginPage();
   }
-}
 
-// TODO: CHECK IF A USER ALREADY IN DATABASE:
-// class GetUserName extends StatelessWidget {
-//   final String documentId;
-//
-//   GetUserName(this.documentId);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     CollectionReference users = FirebaseFirestore.instance.collection('users');
-//
-//     return FutureBuilder<DocumentSnapshot>(
-//       future: users.doc(documentId).get(),
-//       builder:
-//           (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-//
-//         if (snapshot.hasError) {
-//           return Text("Something went wrong");
-//         }
-//
-//         if (snapshot.hasData && !snapshot.data!.exists) {
-//           return Text("Document does not exist");
-//         }
-//
-//         if (snapshot.connectionState == ConnectionState.done) {
-//           Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;
-//           return Text("Full Name: ${data['full_name']} ${data['last_name']}");
-//         }
-//
-//         return Text("loading");
-//       },
-//     );
-//   }
-// }
+}
