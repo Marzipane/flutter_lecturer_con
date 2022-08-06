@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_lecon/common/app_theme.dart';
+import 'package:flutter_lecon/pages/student/tickets_list_page.dart';
 import 'package:flutter_lecon/services/firebase_auth_methods.dart';
 import 'package:provider/provider.dart';
 import 'package:url_strategy/url_strategy.dart';
@@ -45,9 +46,9 @@ class AuthWrapper extends StatelessWidget {
 
     if (firebaseUser != null) {
       if (isStudent(email!)) {
-        return StudentHomePage();
-      } else {
         return LecturerHomePage();
+      } else {
+        return TicketsListPage();
       }
     }
     return const LoginPage();
