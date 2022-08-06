@@ -6,26 +6,25 @@ import 'package:provider/provider.dart';
 import '../../common/app_theme.dart';
 import '../../models/ticket_model.dart';
 import '../../services/firebase_auth_methods.dart';
-import '../lecturer/firbase_read.dart';
-import 'read_lecturer.dart';
+import 'firbase_read.dart';
 
-class TicketsListPage extends StatelessWidget {
-  static const routeName = '/tickets-list-page';
+class TicketHistoryPage extends StatelessWidget {
+  static const routeName = '/ticket-history-page';
 
-  TicketsListPage({Key? key}) : super(key: key);
+  TicketHistoryPage({Key? key}) : super(key: key);
   List list = [];
 
   @override
   Widget build(BuildContext context) {
-    setPageTitle('Student | Tickets', context);
+    setPageTitle('Lecturer | History', context);
     final user = context.read<FirebaseAuthMethods>().user;
     final auth = context.read<FirebaseAuthMethods>();
     return Scaffold(
       appBar: AppBars().user(
-          user: user, context: context, title: 'Tickets List Page', auth: auth),
+          user: user, context: context, title: 'Tickets History Page', auth: auth),
       body: SingleChildScrollView(
         child: StreamBuilder<List<Ticket>>(
-          stream: readStudentTickets(user: user),
+          stream: readLecturerTickets(user: user),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               final tickets = snapshot.data!;
@@ -38,7 +37,7 @@ class TicketsListPage extends StatelessWidget {
                       runAlignment: WrapAlignment.center,
                       children: tickets
                           .map((ticket) =>
-                              buildStudecnticket(ticket, ticket.studentUid))
+                          buildLecturerTicket(ticket, ticket.studentUid))
                           .toList()),
                 ),
               );
@@ -51,24 +50,24 @@ class TicketsListPage extends StatelessWidget {
     );
   }
 
-  Stream<List<Ticket>> readStudentTickets({required user}) {
+  Stream<List<Ticket>> readLecturerTickets({required user}) {
     return FirebaseFirestore.instance
         .collection('tickets')
-        .where('creator', isEqualTo: user.uid)
-        .orderBy('status')
-          .snapshots()
+        .where('receiver', isEqualTo: user.uid)
+        .where('status' , whereIn: ['Answered', 'Discarded'])
+        .snapshots()
         .map((snapshot) =>
-            snapshot.docs.map((doc) => Ticket.fromJson(doc.data())).toList());
+        snapshot.docs.map((doc) => Ticket.fromJson(doc.data())).toList());
   }
 
-  Widget buildStudecnticket(Ticket ticket, studentUid) {
+  Widget buildLecturerTicket(Ticket ticket, studentUid) {
     return Container(
       width: 350,
       margin: const EdgeInsets.only(top: 15),
       padding: const EdgeInsets.all(20.0),
       decoration: AppBoxDecoration().all(),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        buildLecturerStreamBuilder(ticket.teacherUid),
+        buildStreamBuilder(ticket.studentUid),
         SizedBox(
           height: 5,
         ),
@@ -105,7 +104,7 @@ class TicketsListPage extends StatelessWidget {
         Divider(
           thickness: 2,
         ),
-        Center(child: Text('${ticket.status}')),
+        Center(child: Text('${ticket.status}', style: TextStyle(color: ticket.status == 'Discarded' ? Colors.red: Colors.green, fontWeight: FontWeight.bold))),
         SizedBox(
           height: 5,
         ),

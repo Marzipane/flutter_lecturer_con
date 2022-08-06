@@ -120,7 +120,7 @@ class FirebaseAuthMethods {
   }
 
   Future addUser({required UserCredential googleUser}) async {
-    final docTicket = FirebaseFirestore.instance.collection('users').doc();
+    final docTicket = FirebaseFirestore.instance.collection('users').doc(googleUser.user!.uid);
     final user = UserInstance(
         uid: googleUser.user!.uid,
         email: googleUser.user!.email,

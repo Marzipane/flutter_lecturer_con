@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_lecon/pages/lecturer/ticket_history_page.dart';
 import 'package:flutter_lecon/pages/student/tickets_list_page.dart';
 import 'common/create_route.dart';
 import 'pages/general/error_page.dart';
@@ -44,6 +45,10 @@ class RouteGenerator {
       case TicketsListPage.routeName:
         {
           return createRoute(page: TicketsListPage());
+        }
+      case TicketHistoryPage.routeName:
+        {
+          return createRoute(page: TicketHistoryPage());
         }
       default:
         {

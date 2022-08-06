@@ -17,8 +17,8 @@ StreamBuilder<List> buildStreamBuilder(studentUid) {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
             // Image.network(user.photoURL! ?? 'Not found'),
-            Text(user.displayName ?? 'Not found', style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic  ),),
-            Text(user.email ?? 'Not found', style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic  ),),
+            Text(user.displayName ?? 'Not found', style: TextStyle(fontSize: 14, fontStyle: FontStyle.italic  ),),
+            Text(user.email ?? 'Not found', style: TextStyle(fontSize: 14, fontStyle: FontStyle.italic  ),),
           ],),
               ))
               .toList()
