@@ -33,7 +33,6 @@ class LoginPage extends StatelessWidget {
               child: GoogleLoginButton(
                 onTap: () {
                   context.read<FirebaseAuthMethods>().signInWithGoogle(context);
-                  Navigator.popAndPushNamed(context, AuthWrapper.routeName);
                 },
                 text: 'Sign in using Google',
               ),
