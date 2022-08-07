@@ -104,7 +104,7 @@ class TicketHistoryPage extends StatelessWidget {
         Divider(
           thickness: 2,
         ),
-        Center(child: Text('${ticket.status}', style: TextStyle(color: ticket.status == 'Discarded' ? Colors.red: Colors.green, fontWeight: FontWeight.bold))),
+        Center(child: Text('${ticket.status}', style: TextStyle(color: ticket.status == 'Discarded' ? AppColors.LightRed: AppColors.Green, fontWeight: FontWeight.bold))),
         SizedBox(
           height: 5,
         ),

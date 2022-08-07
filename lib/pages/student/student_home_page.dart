@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_lecon/common/smtp.dart';
+import 'package:flutter_lecon/pages/student/tickets_list_page.dart';
 import 'package:flutter_lecon/widgets/appbars.dart';
 import 'package:provider/provider.dart';
 import '../../common/set_page_title.dart';
@@ -23,27 +24,33 @@ class StudentHomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBars().user(user: user, context: context, title: 'Home page', auth: auth),
       body: SingleChildScrollView(
-        child: StreamBuilder<List<UserInstance>>(
-          stream: readTeachers(),
-          builder: (context, snapshot) {
-            if (snapshot.hasError) {
-              return const Text('Error');
-            }
-            if (snapshot.hasData) {
-              final teachers = snapshot.data!;
+        child: Column(
+          children: [
+            SizedBox(height: 10,),
+            ElevatedButton(onPressed: (){Navigator.pushNamed(context, TicketsListPage.routeName);}, child: Text ('Recent Tickets')),
+            StreamBuilder<List<UserInstance>>(
+              stream: readTeachers(),
+              builder: (context, snapshot) {
+                if (snapshot.hasError) {
+                  return const Text('Error');
+                }
+                if (snapshot.hasData) {
+                  final teachers = snapshot.data!;
 
-              return Center(
-                child: SizedBox(
-                  width: 500,
-                  child: Column(
-                    children: teachers.map(buildTeacher).toList(),
-                  ),
-                ),
-              );
-            } else {
-              return const Center(child: CircularProgressIndicator());
-            }
-          },
+                  return Center(
+                    child: SizedBox(
+                      width: 500,
+                      child: Column(
+                        children: teachers.map(buildTeacher).toList(),
+                      ),
+                    ),
+                  );
+                } else {
+                  return const Center(child: CircularProgressIndicator());
+                }
+              },
+            ),
+          ],
         ),
       ),
     );

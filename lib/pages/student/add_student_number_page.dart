@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_lecon/common/app_theme.dart';
 import 'package:flutter_lecon/pages/student/student_home_page.dart';
 
 import '../../common/formatter.dart';
@@ -16,58 +17,89 @@ class AddStudentNumberPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: Column(
         children: [
-          Center(
-            child: Form(
-              key: formKey,
-              child: TextFormField(
-                controller: _studentNumberController,
-                decoration: const InputDecoration(
-                    labelText: 'Student Number',
-                    hintText: 'Enter Student Number ...',
-                    enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                        borderSide: BorderSide(color: Colors.grey)),
-                    // when the field is in focus
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                        borderSide: BorderSide(color: Colors.black)),
-                    isDense: true,
-                    contentPadding: EdgeInsets.all(20) // Added this
-                    ),
-                maxLines: null,
-                validator: (value) {
-                  if (value == null || value.isEmpty || value == '') {
-                    return 'Student Number cannot be empty';
-                  }
-                  return null;
-                },
-                inputFormatters: [
-                  LengthLimitingTextInputFormatter(200,
-                      maxLengthEnforcement: MaxLengthEnforcement.enforced)
-                ],
+          Column(
+            children: [
+              SizedBox(
+                height: 20,
               ),
-            ),
+              Text(
+                'Student Number',
+                style: Theme.of(context).textTheme.headline4,
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                width: 600,
+                child: Form(
+                  key: formKey,
+                  child: TextFormField(
+                    controller: _studentNumberController,
+                    maxLength: 9,
+                    decoration: const InputDecoration(
+                      labelText: 'Student Number',
+                      hintText: 'Enter student number ...',
+                      helperText: 'Format: ##17#####',
+                      helperStyle: TextStyle(color: AppColors.White, fontSize: 13, fontWeight: FontWeight.bold),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                          borderSide: BorderSide(color: Colors.grey)),
+                      // when the field is in focus
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                          borderSide: BorderSide(color: Colors.black)),
+                      isDense: true,
+                      contentPadding: EdgeInsets.all(25),
+                      errorStyle: TextStyle(
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.redAccent
+                      ),
+                    ),
+                    maxLines: null,
+                    validator: (value) {
+                      if (value == null || value.isEmpty || value == '') {
+                        return 'Student Number cannot be empty';
+                      }
+                      else if(value.length != 9){
+                        return 'Student Number must be exatcly of 9 digits';
+                      }
+                      return null;
+                    },
+                    inputFormatters: [
+                      LengthLimitingTextInputFormatter(
+                        200,
+                        maxLengthEnforcement: MaxLengthEnforcement.enforced,
+                      ),
+                      FilteringTextInputFormatter.digitsOnly
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 10,
           ),
           Center(
             child: ElevatedButton(
                 onPressed: () {
                   if (formKey.currentState!.validate()) {
                     String studentNumber = _studentNumberController.text;
-                    addStudentNumber(
-                        docId: docId,
-                        studentNumber: studentNumber
-                    ).then((value) {
+                    addStudentNumber(docId: docId, studentNumber: studentNumber)
+                        .then((value) {
                       return Navigator.popAndPushNamed(
                           context, StudentHomePage.routeName);
                     });
-                    showSnackBar(context, 'Ticket has been sent successfully');
+                    showSnackBar(context, 'Student number added successfully');
                   }
                 },
                 style: ElevatedButton.styleFrom(
                     padding:
-                        EdgeInsets.symmetric(vertical: 20, horizontal: 25)),
+                        EdgeInsets.symmetric(vertical: 21, horizontal: 28)),
                 child: const Text('Submit')),
           )
         ],
