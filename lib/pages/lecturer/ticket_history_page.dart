@@ -86,7 +86,8 @@ class TicketHistoryPage extends StatelessWidget {
         SizedBox(
           height: 5,
         ),
-        Row(
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               'Description: ',
@@ -95,7 +96,26 @@ class TicketHistoryPage extends StatelessWidget {
             Text(
               ticket.description ?? 'Null',
               style: TextStyle(fontSize: 14),
-            )
+            ),
+            ticket.status == "Answered" ?
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Reply: ',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  height: 3,
+                ),
+
+                Text(
+                  ticket.reply ?? 'Null',
+                  style: TextStyle(fontSize: 14),
+                )
+              ],
+            ): SizedBox.shrink(),
+
           ],
         ),
         SizedBox(
