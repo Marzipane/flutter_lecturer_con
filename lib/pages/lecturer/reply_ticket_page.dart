@@ -1,13 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_lecon/common/app_theme.dart';
 import 'package:flutter_lecon/pages/lecturer/lecturer_home_page.dart';
 import 'package:flutter_lecon/widgets/appbars.dart';
 import 'package:provider/provider.dart';
 import '../../common/formatter.dart';
 import '../../common/set_page_title.dart';
+import '../../main.dart';
 import '../../models/ticket_model.dart';
 import '../../services/firebase_auth_methods.dart';
+import '../general/profile_page.dart';
 import 'firbase_read.dart';
 
 class ReplyTicketPage extends StatefulWidget {
@@ -144,51 +147,60 @@ class _ReplyTicketPageState extends State<ReplyTicketPage> {
                       const SizedBox(
                         height: 10,
                       ),
-                      DropdownButton<String>(
-                        value: status,
-                        // icon: const Icon(Icons.arrow_downward),
-                        elevation: 16,
-                        onChanged: (String? newStatusValue) {
-                          setState(() {
-                            status = newStatusValue!;
-                          });
-                        },
-                        items: <String>[
-                          'E',
-                          'A',
-                          'D'
-                        ].map<DropdownMenuItem<String>>((String statusValue) {
-                          return DropdownMenuItem<String>(
-                            value: statusValue,
-                            child: Text((() {
-                              return Formatters().formatStatus(statusValue);
-                            }())),
-                            onTap: () {
-                              String reply = _replyController.text;
-                              if (statusValue == 'A') {
+                      Center(
+                        child: PopupMenuButton<String>(
+                          child: Container(
+                            padding: EdgeInsets.all(8.0),
+                            color: Colors.red,
+                            child: Text('Status'),
+                          ),
+                          onSelected: (String result) {
+                            switch (result) {
+                              case 'answered':
+                                String reply = _replyController.text;
                                 if (formKey.currentState!.validate()) {
                                   updateTicket(
                                           reply: reply,
                                           ticket: ticket,
-                                          status: statusValue)
+                                          status: 'A')
                                       .then((_) => Navigator.popAndPushNamed(
                                           context, LecturerHomePage.routeName));
                                 }
-                              } else if (statusValue == "D") {
-                                updateTicket(
-                                        ticket: ticket, status: statusValue)
-                                    .then((_) => Navigator.pushNamed(
+                                break;
+                              case 'discarded':
+                                updateTicket(ticket: ticket, status: 'D').then(
+                                    (_) => Navigator.popAndPushNamed(
                                         context, LecturerHomePage.routeName));
-                              }
-                              else if(statusValue == "E"){
-                                updateTicket(
-                                    ticket: ticket, status: statusValue, reply: reply)
-                                    .then((_) => Navigator.pushNamed(
-                                    context, LecturerHomePage.routeName));
-                              }
-                            },
-                          );
-                        }).toList(),
+                                break;
+                              default:
+                            }
+                          },
+                          itemBuilder: (BuildContext context) =>
+                              <PopupMenuEntry<String>>[
+                            const PopupMenuItem<String>(
+                              value: 'answered',
+                              child: ListTile(
+                                title: Text(
+                                  'Answered',
+                                  style: TextStyle(fontSize: 14),
+                                ),
+                                trailing:
+                                    Icon(Icons.check, color: AppColors.Green),
+                              ),
+                            ),
+                            const PopupMenuItem<String>(
+                              value: 'discarded',
+                              child: ListTile(
+                                title: Text('Discarded',
+                                    style: TextStyle(fontSize: 14)),
+                                trailing: Icon(
+                                  Icons.delete_forever,
+                                  color: AppColors.LightRed,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
@@ -203,7 +215,7 @@ class _ReplyTicketPageState extends State<ReplyTicketPage> {
   //   return
   // }
 
-  Future updateTicket({reply="", required ticket, required status}) async {
+  Future updateTicket({reply = "", required ticket, required status}) async {
     final docTicket =
         FirebaseFirestore.instance.collection('tickets').doc(ticket.id);
     docTicket

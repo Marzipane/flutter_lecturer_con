@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 import '../../common/app_theme.dart';
 import '../../models/ticket_model.dart';
 import '../../services/firebase_auth_methods.dart';
-import '../lecturer/firbase_read.dart';
 import 'read_lecturer.dart';
 
 class TicketsListPage extends StatelessWidget {
@@ -55,8 +54,7 @@ class TicketsListPage extends StatelessWidget {
     return FirebaseFirestore.instance
         .collection('tickets')
         .where('creator', isEqualTo: user.uid)
-        .orderBy('status')
-          .snapshots()
+        .snapshots()
         .map((snapshot) =>
             snapshot.docs.map((doc) => Ticket.fromJson(doc.data())).toList());
   }
@@ -87,16 +85,21 @@ class TicketsListPage extends StatelessWidget {
         SizedBox(
           height: 5,
         ),
-        Row(
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Description: ',
+              'Reply: ',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
+            SizedBox(
+              height: 3,
+            ),
+            ticket.status == "Answered" ?
             Text(
-              ticket.description ?? 'Null',
+              ticket.reply ?? 'Null',
               style: TextStyle(fontSize: 14),
-            )
+            ): Text('No reply yet')
           ],
         ),
         SizedBox(
@@ -105,7 +108,18 @@ class TicketsListPage extends StatelessWidget {
         Divider(
           thickness: 2,
         ),
-        Center(child: Text('${ticket.status}')),
+        Center(
+            child: Text(
+          '${ticket.status}',
+          style: TextStyle(
+              color: ticket.status == 'Answered'
+                  ? AppColors.Green
+                  : ticket.status == 'Not read yet'
+                      ? Color.fromRGBO(215, 213, 213, 1.0)
+                      : ticket.status == 'Evaluated'
+                          ? AppColors.Gold
+                          : AppColors.LightRed),
+        )),
         SizedBox(
           height: 5,
         ),
