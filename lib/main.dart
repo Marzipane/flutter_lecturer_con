@@ -37,6 +37,7 @@ void main() async {
 }
 
 class AuthWrapper extends StatelessWidget {
+  static const routeName = '/auth-wrapper';
   const AuthWrapper({Key? key}) : super(key: key);
 
   @override
