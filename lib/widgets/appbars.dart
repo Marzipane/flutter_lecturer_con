@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_lecon/services/firebase_auth_methods.dart';
+import '../main.dart';
 import '../pages/general/login_page.dart';
 import '../pages/general/profile_page.dart';
 
@@ -40,7 +41,7 @@ class AppBars {
                 case 'logout':
                     auth.signOut(context).then(
                             (value) => Navigator.popAndPushNamed(
-                            context, LoginPage.routeName));
+                            context, AuthWrapper.routeName));
                   break;
                 default:
               }
