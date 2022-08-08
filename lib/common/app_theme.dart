@@ -12,6 +12,7 @@ class AppColors {
   static const Color LightRed = Color(0xffC46E6C);
   static const Color White = Color(0xffffffff);
   static const Color BackgroundBox = Color.fromARGB(41, 158, 158, 158);
+  static const Color ErrorRed = Color.fromRGBO(255, 0, 0, 1.0);
 
 }
 

@@ -54,9 +54,9 @@ class AddStudentNumberPage extends StatelessWidget {
                       isDense: true,
                       contentPadding: EdgeInsets.all(25),
                       errorStyle: TextStyle(
-                        fontSize: 14.0,
+                        fontSize: 16.0,
                         fontWeight: FontWeight.bold,
-                        color: Colors.redAccent
+                        color: AppColors.ErrorRed,
                       ),
                     ),
                     maxLines: null,
