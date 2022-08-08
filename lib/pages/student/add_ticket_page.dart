@@ -3,6 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_lecon/common/app_theme.dart';
 import 'package:provider/provider.dart';
 import '../../common/set_page_title.dart';
 import '../../models/ticket_model.dart';
@@ -23,6 +24,8 @@ class _AddTicketPageState extends State<AddTicketPage> {
   final _titleController = TextEditingController();
   final _descController = TextEditingController();
   final formKey = GlobalKey<FormState>();
+  int titleLength = 30;
+  int descLength = 250;
   @override
   void dispose() {
     super.dispose();
@@ -59,6 +62,7 @@ class _AddTicketPageState extends State<AddTicketPage> {
                 ),
                 TextFormField(
                   controller: _titleController,
+                  maxLength: titleLength,
                   decoration: const InputDecoration(
                     labelText: 'Title',
                     hintText: 'Enter title ...',
@@ -69,6 +73,11 @@ class _AddTicketPageState extends State<AddTicketPage> {
                     focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10.0)),
                         borderSide: BorderSide(color: Colors.black)),
+                    errorStyle: TextStyle(
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.ErrorRed,
+                    ),
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty || value == '') {
@@ -77,7 +86,7 @@ class _AddTicketPageState extends State<AddTicketPage> {
                     return null;
                   },
                   inputFormatters: [
-                    LengthLimitingTextInputFormatter(30,
+                    LengthLimitingTextInputFormatter(titleLength,
                         maxLengthEnforcement: MaxLengthEnforcement.enforced)
                   ],
                 ),
@@ -86,6 +95,7 @@ class _AddTicketPageState extends State<AddTicketPage> {
                 ),
                 TextFormField(
                   controller: _descController,
+                  maxLength: descLength,
                   decoration: const InputDecoration(
                     labelText: 'Description',
                     hintText: 'Enter description ...',
@@ -96,8 +106,13 @@ class _AddTicketPageState extends State<AddTicketPage> {
                     focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10.0)),
                         borderSide: BorderSide(color: Colors.black)),
-                    isDense: true,
-                    contentPadding: EdgeInsets.all(20) // Added this
+                    errorStyle: TextStyle(
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.ErrorRed,
+                    ),
+                    // isDense: true,
+                    // contentPadding: EdgeInsets.all(20) // Added this
                   ),
                   maxLines: null,
                   validator: (value) {
@@ -107,7 +122,7 @@ class _AddTicketPageState extends State<AddTicketPage> {
                     return null;
                   },
                   inputFormatters: [
-                    LengthLimitingTextInputFormatter(200,
+                    LengthLimitingTextInputFormatter(descLength,
                         maxLengthEnforcement: MaxLengthEnforcement.enforced)
                   ],
                 ),

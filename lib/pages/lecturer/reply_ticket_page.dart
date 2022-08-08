@@ -7,10 +7,8 @@ import 'package:flutter_lecon/widgets/appbars.dart';
 import 'package:provider/provider.dart';
 import '../../common/formatter.dart';
 import '../../common/set_page_title.dart';
-import '../../main.dart';
 import '../../models/ticket_model.dart';
 import '../../services/firebase_auth_methods.dart';
-import '../general/profile_page.dart';
 import 'firbase_read.dart';
 
 class ReplyTicketPage extends StatefulWidget {
@@ -41,6 +39,7 @@ class _ReplyTicketPageState extends State<ReplyTicketPage> {
     final auth = context.read<FirebaseAuthMethods>();
     final args = (ModalRoute.of(context)?.settings.arguments) as Map;
     final Ticket ticket = args['ticket'];
+    int replyLength = 250;
     if (isOpen) {
       updateStatus(ticket: ticket);
       isOpen = false;
@@ -121,19 +120,21 @@ class _ReplyTicketPageState extends State<ReplyTicketPage> {
                       ),
                       TextFormField(
                         controller: _replyController,
+                        maxLength: replyLength,
                         decoration: const InputDecoration(
                           labelText: 'Reply',
                           hintText: 'Your reply ...',
                           isDense: true,
                           contentPadding: EdgeInsets.all(20),
-                          errorStyle: TextStyle(
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.bold,
-                          ), // Added this
+                            errorStyle: TextStyle(
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.bold,
+                              color: AppColors.ErrorRed,
+                            ),
                         ),
                         maxLines: null,
                         inputFormatters: [
-                          LengthLimitingTextInputFormatter(200,
+                          LengthLimitingTextInputFormatter(replyLength,
                               maxLengthEnforcement:
                                   MaxLengthEnforcement.enforced)
                         ],
