@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import '../../common/set_page_title.dart';
 import '../../main.dart';
 import '../../widgets/custom_button.dart';
+import '../student/read_student_data.dart';
 import 'login_page.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -31,7 +32,10 @@ class ProfilePage extends StatelessWidget {
             height: 8,
           ),
           Text(user.displayName ?? ''),
+          SizedBox(height: 2,),
           Text(user.email ?? ''),
+          SizedBox(height: 2,),
+          buildStudentStreamBuilder(user.uid),
           const SizedBox(
             height: 16,
           ),

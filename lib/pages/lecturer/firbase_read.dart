@@ -13,16 +13,25 @@ StreamBuilder<List> buildStreamBuilder(studentUid) {
           mainAxisAlignment: MainAxisAlignment.center,
           children: users
               .map((user) => Center(
-                child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-            // Image.network(user.photoURL! ?? 'Not found'),
-            Text(user.displayName ?? 'Not found', style: TextStyle(fontSize: 14, fontStyle: FontStyle.italic  ),),
-            Text(user.email ?? 'Not found', style: TextStyle(fontSize: 14, fontStyle: FontStyle.italic  ),),
-          ],),
-              ))
-              .toList()
-          ,);
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        // Image.network(user.photoURL! ?? 'Not found'),
+                        Text(
+                          user.displayName ?? 'Not found',
+                          style: TextStyle(
+                              fontSize: 14, fontStyle: FontStyle.italic),
+                        ),
+                        Text(
+                          user.email ?? 'Not found',
+                          style: TextStyle(
+                              fontSize: 14, fontStyle: FontStyle.italic),
+                        ),
+                      ],
+                    ),
+                  ))
+              .toList(),
+        );
       } else {
         return const CircularProgressIndicator();
       }
@@ -39,4 +48,3 @@ Stream<List<UserInstance>> getStudent({required uid}) {
           .map((doc) => UserInstance.fromJson(doc.data()))
           .toList());
 }
-
