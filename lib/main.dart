@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_lecon/common/app_theme.dart';
-import 'package:flutter_lecon/pages/student/add_student_number_page.dart';
+import 'package:flutter_lecon/pages/student/add_student_data_page.dart';
 import 'package:flutter_lecon/pages/student/student_home_page.dart';
 import 'package:flutter_lecon/services/firebase_auth_methods.dart';
 import 'package:provider/provider.dart';
@@ -66,8 +66,8 @@ class AuthWrapper extends StatelessWidget {
                 if (data['isLecturer'] == true) {
                   return LecturerHomePage();
                 } else {
-                  if (data['studentNumber'] == null) {
-                    return AddStudentNumberPage(docId: firebaseUser.uid,);
+                  if (data['studentNumber'] == null && data['password'] == null) {
+                    return AddStudentDataPage(docId: firebaseUser.uid,);
                   }
                   else{
                     return StudentHomePage();
