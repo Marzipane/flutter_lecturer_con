@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_lecon/common/app_theme.dart';
 import 'package:flutter_lecon/pages/student/student_home_page.dart';
-
-import '../../common/formatter.dart';
 import '../../common/set_page_title.dart';
 import '../../utils/show_snackbar.dart';
 
@@ -42,11 +40,11 @@ class _AddStudentDataPageState extends State<AddStudentDataPage> {
                 height: 20,
               ),
               Text(
-                'Student Number',
+                'Add Student data',
                 style: Theme.of(context).textTheme.headline4,
               ),
               SizedBox(
-                height: 10,
+                height: 20,
               ),
               Container(
                 width: 600,
