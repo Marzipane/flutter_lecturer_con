@@ -20,8 +20,8 @@ class TicketHistoryPage extends StatelessWidget {
     final user = context.read<FirebaseAuthMethods>().user;
     final auth = context.read<FirebaseAuthMethods>();
     return Scaffold(
-      appBar: AppBars().user(
-          user: user, context: context, title: 'Tickets History Page', auth: auth),
+      appBar: AppBars().builtLecturerAppBar(
+          user: user, context: context, title: 'History', auth: auth),
       body: SingleChildScrollView(
         child: StreamBuilder<List<Ticket>>(
           stream: readLecturerTickets(user: user),

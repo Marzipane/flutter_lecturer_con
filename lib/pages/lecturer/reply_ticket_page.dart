@@ -46,7 +46,7 @@ class _ReplyTicketPageState extends State<ReplyTicketPage> {
     }
     return Scaffold(
       appBar: AppBars()
-          .user(user: user, context: context, title: 'Reply form', auth: auth),
+          .builtLecturerAppBar(user: user, context: context, title: 'Reply form', auth: auth),
       body: Center(
         child: Column(
           children: [

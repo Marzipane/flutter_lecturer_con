@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_lecon/common/smtp.dart';
 import 'package:flutter_lecon/pages/student/tickets_list_page.dart';
@@ -8,26 +9,28 @@ import '../../common/set_page_title.dart';
 import '../../models/users_instance_model.dart';
 import '../../pages/student/add_ticket_page.dart';
 import '../../services/firebase_auth_methods.dart';
+import '../general/add_user_data_page.dart';
+import '../lecturer/lecturer_home_page.dart';
 
 class StudentHomePage extends StatelessWidget {
   static const routeName = '/student-home-page';
+
   const StudentHomePage({Key? key}) : super(key: key);
-
-
-
 
   @override
   Widget build(BuildContext context) {
-    setPageTitle('Student | Home', context);
+    setPageTitle('Student | Ask', context);
     final user = context.read<FirebaseAuthMethods>().user;
     final auth = context.read<FirebaseAuthMethods>();
     return Scaffold(
-      appBar: AppBars().user(user: user, context: context, title: 'Home page', auth: auth),
+      appBar: AppBars().builtStudentAppBar(
+          user: user, context: context, title: 'Ask', auth: auth),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: 10,),
-            ElevatedButton(onPressed: (){Navigator.pushNamed(context, TicketsListPage.routeName);}, child: Text ('Recent Tickets')),
+            SizedBox(
+              height: 10,
+            ),
             StreamBuilder<List<UserInstance>>(
               stream: readTeachers(),
               builder: (context, snapshot) {
@@ -85,15 +88,30 @@ class StudentHomePage extends StatelessWidget {
 class MyButton extends StatelessWidget {
   const MyButton({Key? key, required this.teacher}) : super(key: key);
   final UserInstance teacher;
+
   @override
   Widget build(BuildContext context) {
+    CollectionReference users = FirebaseFirestore.instance.collection('users');
+    final firebaseUser = context.watch<User?>();
     return ElevatedButton(
         onPressed: () {
-          Navigator.pushNamed(context, AddTicketPage.routeName,
-              arguments: {'teacher': teacher});
+          buildPasswordConfirmation(context);
+          // Navigator.pushNamed(context, AddTicketPage.routeName,
+          //     arguments: {'teacher': teacher});
         },
         child: const Text('Ask'));
   }
+
+  Future<dynamic> buildPasswordConfirmation(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              title: Text('Password Confirmation'),
+          content: TextFormField(),
+          actions: [
+            TextButton(onPressed: (){}, child: Text('Confirm')),
+            TextButton(onPressed: (){Navigator.pop(context);}, child: Text('Cancel'))
+          ],
+            ));
+  }
 }
-
-
