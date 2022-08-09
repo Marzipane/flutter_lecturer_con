@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_lecon/common/app_theme.dart';
-import 'package:flutter_lecon/pages/student/add_student_data_page.dart';
+import 'package:flutter_lecon/pages/general/add_user_data_page.dart';
 import 'package:flutter_lecon/pages/student/student_home_page.dart';
 import 'package:flutter_lecon/services/firebase_auth_methods.dart';
 import 'package:provider/provider.dart';
@@ -38,6 +38,7 @@ void main() async {
 
 class AuthWrapper extends StatelessWidget {
   static const routeName = '/auth-wrapper';
+
   const AuthWrapper({Key? key}) : super(key: key);
 
   @override
@@ -52,30 +53,39 @@ class AuthWrapper extends StatelessWidget {
           builder:
               (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
             if (snapshot.hasError) {
-              return Text("Something went wrong");
+              return const Text("Something went wrong");
             }
 
             if (snapshot.hasData && !snapshot.data!.exists) {
-              return Text("Document does not exist");
+              return const Text("Document does not exist");
             }
 
             if (snapshot.connectionState == ConnectionState.done) {
               Map<String, dynamic> data =
                   snapshot.data!.data() as Map<String, dynamic>;
               if (firebaseUser.uid == data['uid']) {
-                if (data['isLecturer'] == true) {
+                // IF USER IS LECTURER
+                if (data['isLecturer']) {
+                  if (data['password'] == null) {
+                    return AddUserDataPage(
+                        docId: firebaseUser.uid,
+                        isLecturer: data['isLecturer']);
+                  }
                   return LecturerHomePage();
-                } else {
-                  if (data['studentNumber'] == null && data['password'] == null) {
-                    return AddStudentDataPage(docId: firebaseUser.uid,);
+                }
+                // OTHERWISE, IT IS A STUDENT
+                else {
+                  if (data['studentNumber'] == null ||
+                      data['password'] == null) {
+                    return AddUserDataPage(
+                        docId: firebaseUser.uid,
+                        isLecturer: data['isLecturer']);
                   }
-                  else{
-                    return StudentHomePage();
-                  }
+                  return StudentHomePage();
                 }
               }
             }
-            return Scaffold(
+            return const Scaffold(
               body: Center(
                 child: CircularProgressIndicator(),
               ),
@@ -84,5 +94,4 @@ class AuthWrapper extends StatelessWidget {
     }
     return const LoginPage();
   }
-
 }

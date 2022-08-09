@@ -25,12 +25,11 @@ class LecturerHomePage extends StatelessWidget {
     final user = context.read<FirebaseAuthMethods>().user;
     final auth = context.read<FirebaseAuthMethods>();
     return Scaffold(
-      appBar: AppBars().user(user: user, context: context, title: 'Lecturer Home Page', auth: auth),
+      appBar: AppBars().builtLecturerAppBar(user: user, context: context, title: 'Reply', auth: auth),
       body: SingleChildScrollView(
         child: Column(
           children: [
             SizedBox(height: 10,),
-            ElevatedButton(onPressed: (){Navigator.pushNamed(context, TicketHistoryPage.routeName);}, child: Text ('Recent Tickets')),
             StreamBuilder<List<Ticket>>(
               stream: readTickets(user: user),
               builder: (context, snapshot) {

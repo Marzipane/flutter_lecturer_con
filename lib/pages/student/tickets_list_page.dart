@@ -16,12 +16,12 @@ class TicketsListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    setPageTitle('Student | Tickets', context);
+    setPageTitle('Student | History', context);
     final user = context.read<FirebaseAuthMethods>().user;
     final auth = context.read<FirebaseAuthMethods>();
     return Scaffold(
-      appBar: AppBars().user(
-          user: user, context: context, title: 'Tickets List Page', auth: auth),
+      appBar: AppBars().builtStudentAppBar(
+          user: user, context: context, title: 'History', auth: auth),
       body: SingleChildScrollView(
         child: StreamBuilder<List<Ticket>>(
           stream: readStudentTickets(user: user),

@@ -22,7 +22,7 @@ class ProfilePage extends StatelessWidget {
     final auth = context.read<FirebaseAuthMethods>();
 
     return Scaffold(
-      appBar: AppBars().user(user: user, context: context, title: 'Profile page', auth: auth),
+      appBar: AppBars().builtStudentAppBar(user: user, context: context, title: 'Profile page', auth: auth),
       body: Center(
         child: Column(children: [
           const SizedBox(height: 40),
