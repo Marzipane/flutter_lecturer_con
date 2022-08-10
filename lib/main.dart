@@ -71,7 +71,7 @@ class AuthWrapper extends StatelessWidget {
                         docId: firebaseUser.uid,
                         isLecturer: data['isLecturer']);
                   }
-                  return LecturerHomePage();
+                  return LecturerHomePage(data: data);
                 }
                 // OTHERWISE, IT IS A STUDENT
                 else {
@@ -81,7 +81,7 @@ class AuthWrapper extends StatelessWidget {
                         docId: firebaseUser.uid,
                         isLecturer: data['isLecturer']);
                   }
-                  return StudentHomePage();
+                  return StudentHomePage(data: data);
                 }
               }
             }

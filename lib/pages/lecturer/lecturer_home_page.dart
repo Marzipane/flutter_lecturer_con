@@ -16,12 +16,13 @@ import 'reply_ticket_page.dart';
 class LecturerHomePage extends StatelessWidget {
   static const routeName = '/lecturer-home-page';
 
-  LecturerHomePage({Key? key}) : super(key: key);
+  LecturerHomePage({Key? key, this.data}) : super(key: key);
   List list = [];
+  final data;
 
   @override
   Widget build(BuildContext context) {
-    setPageTitle('Lecturer | Home', context);
+    setPageTitle('Lecturer | Home ${data['password']}', context);
     final user = context.read<FirebaseAuthMethods>().user;
     final auth = context.read<FirebaseAuthMethods>();
     return Scaffold(
