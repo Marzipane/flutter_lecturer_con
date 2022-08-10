@@ -11,7 +11,7 @@ import '../../models/ticket_model.dart';
 import '../../models/users_instance_model.dart';
 import '../../services/firebase_auth_methods.dart';
 import '../../utils/show_snackbar.dart';
-import 'student_home_page.dart';
+
 
 class AddTicketPage extends StatefulWidget {
   static const routeName = '/add-ticket-page';

@@ -2,8 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_lecon/common/smtp.dart';
-import 'package:flutter_lecon/pages/student/tickets_list_page.dart';
 import 'package:flutter_lecon/widgets/appbars.dart';
 import 'package:provider/provider.dart';
 import '../../common/app_theme.dart';
@@ -11,18 +9,6 @@ import '../../common/set_page_title.dart';
 import '../../models/users_instance_model.dart';
 import '../../pages/student/add_ticket_page.dart';
 import '../../services/firebase_auth_methods.dart';
-import '../general/add_user_data_page.dart';
-import '../lecturer/lecturer_home_page.dart';
-
-// class StudentHomePage extends StatefulWidget {
-//   static const routeName = '/student-home-page';
-//
-//   StudentHomePage({Key? key, this.data}) : super(key: key);
-//   final data;
-//
-//   @override
-//   State<StudentHomePage> createState() => _StudentHomePageState();
-// }
 
 class StudentHomePage extends StatelessWidget {
   static const routeName = '/student-home-page';
@@ -35,7 +21,7 @@ class StudentHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    setPageTitle('Student | Ask ${data['password']}', context);
+    setPageTitle('Student | Ask', context);
     final user = context.read<FirebaseAuthMethods>().user;
     final auth = context.read<FirebaseAuthMethods>();
     return Scaffold(
@@ -104,22 +90,6 @@ class StudentHomePage extends StatelessWidget {
   }
 }
 
-// class MyButton extends StatefulWidget {
-//   MyButton(
-//       {Key? key,
-//       required this.teacher,
-//       required this.password,
-//       required this.formKey,
-//       required this.controller})
-//       : super(key: key);
-//   final UserInstance teacher;
-//   String password;
-//   final formKey;
-//   TextEditingController controller;
-//
-//   @override
-//   State<MyButton> createState() => _MyButtonState();
-// }
 
 class MyButton extends StatelessWidget {
   MyButton(
@@ -156,7 +126,7 @@ class MyButton extends StatelessWidget {
           child: TextFormField(
             controller: controller,
             decoration: InputDecoration(
-              labelText: 'Password ${password}',
+              labelText: 'Password ',
               hintText: 'Password ...',
               enabledBorder: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
@@ -181,8 +151,8 @@ class MyButton extends StatelessWidget {
         actions: [
           TextButton(onPressed: () {
             if(formKey.currentState!.validate()){
-              Navigator.popAndPushNamed(context, AddTicketPage.routeName,
-                  arguments: {'teacher': teacher});
+              Navigator.pushNamedAndRemoveUntil(context, AddTicketPage.routeName,
+                  arguments: {'teacher': teacher}, (route) => false);
             }
           }, child: Text('Confirm')),
           TextButton(

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_lecon/common/app_theme.dart';
 import 'package:flutter_lecon/main.dart';
-import 'package:flutter_lecon/pages/lecturer/lecturer_home_page.dart';
 import 'package:flutter_lecon/widgets/appbars.dart';
 import 'package:provider/provider.dart';
 import '../../common/formatter.dart';
@@ -46,8 +45,8 @@ class _ReplyTicketPageState extends State<ReplyTicketPage> {
       isOpen = false;
     }
     return Scaffold(
-      appBar: AppBars()
-          .builtLecturerAppBar(user: user, context: context, title: 'Reply form', auth: auth),
+      appBar: AppBars().builtLecturerAppBar(
+          user: user, context: context, title: 'Reply form', auth: auth),
       body: Center(
         child: Column(
           children: [
@@ -127,11 +126,11 @@ class _ReplyTicketPageState extends State<ReplyTicketPage> {
                           hintText: 'Your reply ...',
                           isDense: true,
                           contentPadding: EdgeInsets.all(20),
-                            errorStyle: TextStyle(
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.bold,
-                              color: AppColors.ErrorRed,
-                            ),
+                          errorStyle: TextStyle(
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.ErrorRed,
+                          ),
                         ),
                         maxLines: null,
                         inputFormatters: [
@@ -165,14 +164,20 @@ class _ReplyTicketPageState extends State<ReplyTicketPage> {
                                           reply: reply,
                                           ticket: ticket,
                                           status: 'A')
-                                      .then((_) => Navigator.popAndPushNamed(
-                                          context, AuthWrapper.routeName));
+                                      .then((_) =>
+                                          Navigator.pushNamedAndRemoveUntil(
+                                              context,
+                                              AuthWrapper.routeName,
+                                              (route) => false));
                                 }
                                 break;
                               case 'discarded':
                                 updateTicket(ticket: ticket, status: 'D').then(
-                                    (_) => Navigator.popAndPushNamed(
-                                        context, AuthWrapper.routeName));
+                                  (_) => Navigator.pushNamedAndRemoveUntil(
+                                      context,
+                                      AuthWrapper.routeName,
+                                      (route) => false),
+                                );
                                 break;
                               default:
                             }

@@ -25,7 +25,7 @@ class LecturerHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    setPageTitle('Lecturer | Home ${data['password']}', context);
+    setPageTitle('Lecturer | Home', context);
     final user = context.read<FirebaseAuthMethods>().user;
     final auth = context.read<FirebaseAuthMethods>();
     return Scaffold(
@@ -138,7 +138,7 @@ class MyButton extends StatelessWidget {
           child: TextFormField(
             controller: controller,
             decoration: InputDecoration(
-              labelText: 'Password ${password}',
+              labelText: 'Password',
               hintText: 'Password ...',
               enabledBorder: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
@@ -163,8 +163,8 @@ class MyButton extends StatelessWidget {
         actions: [
           TextButton(onPressed: () {
             if(formKey.currentState!.validate()){
-              Navigator.popAndPushNamed(context, ReplyTicketPage.routeName,
-                  arguments: {'ticket': ticket});
+              Navigator.pushNamedAndRemoveUntil(context, ReplyTicketPage.routeName,
+                  arguments: {'ticket': ticket}, (route) => false);
             }
           }, child: Text('Confirm')),
           TextButton(
@@ -187,19 +187,3 @@ class MyButton extends StatelessWidget {
     return null;
   }
 }
-
-
-// class ReplyButton extends StatelessWidget {
-//   const ReplyButton({Key? key, required this.ticket}) : super(key: key);
-//   final Ticket ticket;
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return ElevatedButton(
-//         onPressed: () {
-//           Navigator.pushNamed(context, ReplyTicketPage.routeName,
-//               arguments: {'ticket': ticket});
-//         },
-//         child: const Text('Answer'));
-//   }
-// }

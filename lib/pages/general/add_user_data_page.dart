@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_lecon/common/app_theme.dart';
 import 'package:flutter_lecon/main.dart';
-import 'package:flutter_lecon/pages/lecturer/lecturer_home_page.dart';
-import 'package:flutter_lecon/pages/student/student_home_page.dart';
 import '../../common/set_page_title.dart';
 import '../../utils/show_snackbar.dart';
 
