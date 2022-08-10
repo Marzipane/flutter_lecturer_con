@@ -40,7 +40,7 @@ class AppBars {
         onSelected: (String result) {
           switch (result) {
             case 'reply':
-              Navigator.popAndPushNamed(context, LecturerHomePage.routeName);
+              Navigator.popAndPushNamed(context, AuthWrapper.routeName);
               break;
             case 'history':
               Navigator.popAndPushNamed(context, TicketHistoryPage.routeName);
@@ -146,7 +146,7 @@ class AppBars {
         onSelected: (String result) {
           switch (result) {
             case 'ask':
-              Navigator.popAndPushNamed(context, StudentHomePage.routeName);
+              Navigator.popAndPushNamed(context, AuthWrapper.routeName);
               break;
             case 'history':
               Navigator.popAndPushNamed(context, TicketsListPage.routeName);

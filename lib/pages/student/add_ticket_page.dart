@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_lecon/common/app_theme.dart';
+import 'package:flutter_lecon/main.dart';
 import 'package:provider/provider.dart';
 import '../../common/set_page_title.dart';
 import '../../models/ticket_model.dart';
@@ -142,7 +143,7 @@ class _AddTicketPageState extends State<AddTicketPage> {
                             teacherUid: teacher.uid,
                           ).then((value) {
                             return Navigator.popAndPushNamed(
-                                context, StudentHomePage.routeName);
+                                context, AuthWrapper.routeName);
                           });
                           showSnackBar(
                               context, 'Ticket has been sent successfully');

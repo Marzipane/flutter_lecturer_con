@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_lecon/common/app_theme.dart';
+import 'package:flutter_lecon/main.dart';
 import 'package:flutter_lecon/pages/lecturer/lecturer_home_page.dart';
 import 'package:flutter_lecon/widgets/appbars.dart';
 import 'package:provider/provider.dart';
@@ -165,13 +166,13 @@ class _ReplyTicketPageState extends State<ReplyTicketPage> {
                                           ticket: ticket,
                                           status: 'A')
                                       .then((_) => Navigator.popAndPushNamed(
-                                          context, LecturerHomePage.routeName));
+                                          context, AuthWrapper.routeName));
                                 }
                                 break;
                               case 'discarded':
                                 updateTicket(ticket: ticket, status: 'D').then(
                                     (_) => Navigator.popAndPushNamed(
-                                        context, LecturerHomePage.routeName));
+                                        context, AuthWrapper.routeName));
                                 break;
                               default:
                             }
