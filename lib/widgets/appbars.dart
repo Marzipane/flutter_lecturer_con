@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_lecon/pages/lecturer/lecturer_home_page.dart';
 import 'package:flutter_lecon/pages/lecturer/ticket_history_page.dart';
-import 'package:flutter_lecon/pages/student/student_home_page.dart';
 import 'package:flutter_lecon/pages/student/tickets_list_page.dart';
 import '../main.dart';
 import '../pages/general/profile_page.dart';
@@ -40,7 +38,7 @@ class AppBars {
         onSelected: (String result) {
           switch (result) {
             case 'reply':
-              Navigator.popAndPushNamed(context, LecturerHomePage.routeName);
+              Navigator.popAndPushNamed(context, AuthWrapper.routeName);
               break;
             case 'history':
               Navigator.popAndPushNamed(context, TicketHistoryPage.routeName);
@@ -88,8 +86,8 @@ class AppBars {
                   break;
                 case 'logout':
                   auth.signOut(context).then((value) =>
-                      Navigator.popAndPushNamed(
-                          context, AuthWrapper.routeName));
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, AuthWrapper.routeName, (route) => false));
                   break;
                 default:
               }
@@ -146,7 +144,7 @@ class AppBars {
         onSelected: (String result) {
           switch (result) {
             case 'ask':
-              Navigator.popAndPushNamed(context, StudentHomePage.routeName);
+              Navigator.popAndPushNamed(context, AuthWrapper.routeName);
               break;
             case 'history':
               Navigator.popAndPushNamed(context, TicketsListPage.routeName);
@@ -194,8 +192,8 @@ class AppBars {
                   break;
                 case 'logout':
                   auth.signOut(context).then((value) =>
-                      Navigator.popAndPushNamed(
-                          context, AuthWrapper.routeName));
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, AuthWrapper.routeName, (route) => false));
                   break;
                 default:
               }

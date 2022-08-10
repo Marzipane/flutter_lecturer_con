@@ -2,8 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_lecon/common/app_theme.dart';
-import 'package:flutter_lecon/pages/lecturer/lecturer_home_page.dart';
-import 'package:flutter_lecon/pages/student/student_home_page.dart';
+import 'package:flutter_lecon/main.dart';
 import '../../common/set_page_title.dart';
 import '../../utils/show_snackbar.dart';
 
@@ -168,7 +167,7 @@ class _AddUserDataPageState extends State<AddUserDataPage> {
                       password: password)
                       .then((value) {
                     return Navigator.popAndPushNamed(
-                        context, StudentHomePage.routeName);
+                        context, AuthWrapper.routeName);
                   });
                   showSnackBar(
                       context, 'Student has registered successfully');
@@ -265,7 +264,7 @@ class _AddUserDataPageState extends State<AddUserDataPage> {
                       password: password)
                       .then((value) {
                     return Navigator.popAndPushNamed(
-                        context, LecturerHomePage.routeName);
+                        context, AuthWrapper.routeName);
                   });
                   showSnackBar(
                       context, 'Lecturer has registered successfully');

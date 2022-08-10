@@ -4,12 +4,10 @@ import 'package:flutter_lecon/services/firebase_auth_methods.dart';
 import 'package:flutter_lecon/widgets/appbars.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-
 import '../../common/set_page_title.dart';
 import '../../main.dart';
 import '../../widgets/custom_button.dart';
 import '../student/read_student_data.dart';
-import 'login_page.dart';
 
 class ProfilePage extends StatelessWidget {
   static const routeName = '/profile-page';

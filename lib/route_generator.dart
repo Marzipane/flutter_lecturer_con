@@ -33,7 +33,7 @@ class RouteGenerator {
         }
       case StudentHomePage.routeName:
         {
-          return createRoute(page: const StudentHomePage());
+          return createRoute(page:  StudentHomePage());
         }
       case LecturerHomePage.routeName:
         {
