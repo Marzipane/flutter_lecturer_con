@@ -29,6 +29,7 @@ void main() async {
           initialData: null),
     ],
     child: MaterialApp(
+      debugShowCheckedModeBanner: false,
       onGenerateRoute: RouteGenerator.generateRoute,
       theme: AppTheme(),
       home: const AuthWrapper(),

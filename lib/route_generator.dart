@@ -18,7 +18,7 @@ class RouteGenerator {
     switch (settings.name) {
       case '/':
         {
-          return createRoute(page: const HomePage());
+          return createRoute(page: const AuthWrapper());
         }
       case LoginPage.routeName:
         {
@@ -28,9 +28,13 @@ class RouteGenerator {
         {
           return createRoute(page: const AddTicketPage(), settings: settings);
         }
-      case ProfilePage.routeName:
+      case LecturerProfilePage.routeName:
         {
-          return createRoute(page: const ProfilePage());
+          return createRoute(page: const LecturerProfilePage());
+        }
+      case StudentProfilePage.routeName:
+        {
+          return createRoute(page: const StudentProfilePage());
         }
       case StudentHomePage.routeName:
         {
@@ -52,9 +56,6 @@ class RouteGenerator {
         {
           return createRoute(page: TicketHistoryPage());
         }
-      case AuthWrapper.routeName:{
-        return createRoute(page: AuthWrapper());
-      }
       case ChangeStudentPasswordPage.routeName:{
         return createRoute(page: ChangeStudentPasswordPage());
       }

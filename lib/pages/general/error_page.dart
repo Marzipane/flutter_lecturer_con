@@ -59,7 +59,7 @@ class ErrorPage extends StatelessWidget {
                       child: GestureDetector(
                         onTap: () {
                           Navigator.popAndPushNamed(
-                              context, AuthWrapper.routeName);
+                              context, '/');
                         },
                         child: Text(
                           'Go to Log In page',

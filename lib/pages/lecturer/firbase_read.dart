@@ -16,7 +16,10 @@ StreamBuilder<List> buildStreamBuilder(studentUid) {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Image.network(user.photoURL ?? 'Not found'),
+                        Image.network(
+                          user.photoURL ?? 'Not found',
+                          height: 200,
+                        ),
                         Text(
                           user.displayName ?? 'Not found',
                           style: TextStyle(
