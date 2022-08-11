@@ -149,17 +149,17 @@ class MyButton extends StatelessWidget {
           ),
         ),
         actions: [
+          TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text('Cancel',style: TextStyle(color: AppColors.ErrorRed))),
           TextButton(onPressed: () {
             if(formKey.currentState!.validate()){
               Navigator.pushNamedAndRemoveUntil(context, AddTicketPage.routeName,
                   arguments: {'teacher': teacher}, (route) => false);
             }
-          }, child: Text('Confirm')),
-          TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: Text('Cancel'))
+          }, child: Text('Confirm',style: TextStyle(color: AppColors.Green),)),
         ],
       ),
     );

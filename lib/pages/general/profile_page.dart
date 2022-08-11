@@ -24,9 +24,51 @@ class ProfilePage extends StatelessWidget {
       body: Center(
         child: Column(children: [
           const SizedBox(height: 40),
-            SizedBox(height: 300, width: 300,
-            child: Image.network(user.photoURL ??
-                'https://upload.wikimedia.org/wikipedia/commons/0/0b/Gau-logo.png'),),
+            InkWell(
+              onHover: (){}(),
+              onTap: (){
+                showDialog<void>(
+                  context: context,
+                  barrierDismissible: true, // user can tap anywhere to close a dialog
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text('Change Avatar'),
+                      content: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text('Write an URL of your image'),
+                          SizedBox(height: 20,),
+                          SizedBox(
+                            height: 40,
+                            width: 300,
+                            child: TextField(
+
+                            ),
+                          )
+                        ],
+                      ),
+                      actions: <Widget>[
+                        TextButton(
+                          child: const Text('Cancel',style: TextStyle(color: AppColors.ErrorRed),),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                        TextButton(
+                          child: const Text('Submit',style: TextStyle(color: AppColors.Green),),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
+              child: SizedBox(height: 300, width: 300,
+              child: Image.network(user.photoURL ??
+                  'https://upload.wikimedia.org/wikipedia/commons/0/0b/Gau-logo.png'),),
+            ),
           const SizedBox(
             height: 8,
           ),
