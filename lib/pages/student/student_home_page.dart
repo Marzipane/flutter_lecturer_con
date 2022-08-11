@@ -44,8 +44,12 @@ class StudentHomePage extends StatelessWidget {
 
                   return Center(
                     child: SizedBox(
-                      width: 500,
-                      child: Column(
+                      width: MediaQuery.of(context).size.width * 0.7,
+                      child: Wrap(
+                        alignment: WrapAlignment.spaceAround,
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        spacing: 10,
+                        runSpacing: 10,
                         children: teachers.map(buildTeacher).toList(),
                       ),
                     ),
@@ -63,19 +67,36 @@ class StudentHomePage extends StatelessWidget {
 
   Widget buildTeacher(UserInstance teacher) {
     return Container(
+      width: 400,
       margin: const EdgeInsets.only(top: 15),
       padding: const EdgeInsets.all(10.0),
       decoration: BoxDecoration(
           border: Border.all(color: Colors.black, width: 0.4),
-          borderRadius: BorderRadius.circular(23.0)),
+          borderRadius: BorderRadius.circular(10.0)),
       child: ListTile(
-          leading: Text(teacher.email!),
-          trailing: MyButton(
-            teacher: teacher,
-            password: data['password'],
-            formKey: formKey,
-            controller: _passwordCheckController,
-          )),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Image.network(teacher.photoURL!, height: 200,),
+                  SizedBox(height: 10,),
+                  Text(teacher.displayName!),
+                  SizedBox(height: 10,),
+                  Text(teacher.email!, style: TextStyle(color: AppColors.LightGold, fontSize: 12),),
+                  SizedBox(height: 10,),
+                  MyButton(
+                    teacher: teacher,
+                    password: data['password'],
+                    formKey: formKey,
+                    controller: _passwordCheckController,
+                  ),
+                ],
+              ),
+            ],
+          ),
+      ),
     );
   }
 
