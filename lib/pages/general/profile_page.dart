@@ -24,8 +24,9 @@ class ProfilePage extends StatelessWidget {
       body: Center(
         child: Column(children: [
           const SizedBox(height: 40),
-            Image.network(user.photoURL ??
-                    'https://upload.wikimedia.org/wikipedia/commons/0/0b/Gau-logo.png'),
+            SizedBox(height: 300, width: 300,
+            child: Image.network(user.photoURL ??
+                'https://upload.wikimedia.org/wikipedia/commons/0/0b/Gau-logo.png'),),
           const SizedBox(
             height: 8,
           ),
