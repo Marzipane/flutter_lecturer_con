@@ -142,8 +142,8 @@ class _AddTicketPageState extends State<AddTicketPage> {
                             uid: user.uid,
                             teacherUid: teacher.uid,
                           ).then((value) {
-                            return Navigator.popAndPushNamed(
-                                context, AuthWrapper.routeName);
+                            return Navigator.pushNamedAndRemoveUntil(
+                                context, '/', (route) => false);
                           });
                           showSnackBar(
                               context, 'Ticket has been sent successfully');

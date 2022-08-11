@@ -89,6 +89,21 @@ class TicketsListPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
+              'Description: ',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+            Text(
+              ticket.description ?? 'Null',
+              style: TextStyle(fontSize: 14),
+              // TODO: THIS IS TEXT WRAP
+              maxLines: 5,
+              overflow: TextOverflow.ellipsis,
+              softWrap: false,
+            ),
+            SizedBox(
+              height: 3,
+            ),
+            Text(
               'Reply: ',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),

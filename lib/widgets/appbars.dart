@@ -39,7 +39,7 @@ class AppBars {
         onSelected: (String result) {
           switch (result) {
             case 'reply':
-              Navigator.popAndPushNamed(context, AuthWrapper.routeName);
+              Navigator.popAndPushNamed(context, '/');
               break;
             case 'history':
               Navigator.popAndPushNamed(context, TicketHistoryPage.routeName);
@@ -96,12 +96,12 @@ class AppBars {
             onSelected: (String result) {
               switch (result) {
                 case 'profile':
-                  Navigator.popAndPushNamed(context, ProfilePage.routeName);
+                  Navigator.popAndPushNamed(context, LecturerProfilePage.routeName);
                   break;
                 case 'logout':
                   auth.signOut(context).then((value) =>
                       Navigator.pushNamedAndRemoveUntil(
-                          context, AuthWrapper.routeName, (route) => false));
+                          context, '/', (route) => false));
                   break;
                 default:
               }
@@ -158,7 +158,7 @@ class AppBars {
         onSelected: (String result) {
           switch (result) {
             case 'ask':
-              Navigator.popAndPushNamed(context, AuthWrapper.routeName);
+              Navigator.popAndPushNamed(context,'/');
               break;
             case 'history':
               Navigator.popAndPushNamed(context, TicketsListPage.routeName);
@@ -215,12 +215,12 @@ class AppBars {
             onSelected: (String result) {
               switch (result) {
                 case 'profile':
-                  Navigator.popAndPushNamed(context, ProfilePage.routeName);
+                  Navigator.popAndPushNamed(context, StudentProfilePage.routeName);
                   break;
                 case 'logout':
                   auth.signOut(context).then((value) =>
                       Navigator.pushNamedAndRemoveUntil(
-                          context, AuthWrapper.routeName, (route) => false));
+                          context, '/', (route) => false));
                   break;
                 default:
               }

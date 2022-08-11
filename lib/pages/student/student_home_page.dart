@@ -146,6 +146,7 @@ class MyButton extends StatelessWidget {
           key: formKey,
           child: TextFormField(
             controller: controller,
+            obscureText: true,
             decoration: InputDecoration(
               labelText: 'Password ',
               hintText: 'Password ...',

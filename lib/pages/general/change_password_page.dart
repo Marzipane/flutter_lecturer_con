@@ -9,6 +9,8 @@ import '../../widgets/change_password_widget.dart';
 class ChangeStudentPasswordPage extends StatelessWidget {
 
   static const routeName = '/change-student-password-page';
+
+  ChangeStudentPasswordPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     setPageTitle('Student | Password', context);
@@ -27,6 +29,8 @@ class ChangeStudentPasswordPage extends StatelessWidget {
 class ChangeLecturerPasswordPage extends StatelessWidget {
 
   static const routeName = '/change-lecturer-password-page';
+
+  ChangeLecturerPasswordPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     setPageTitle('Lecturer | Password', context);

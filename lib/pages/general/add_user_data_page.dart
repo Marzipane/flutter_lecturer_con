@@ -170,8 +170,8 @@ class _AddUserDataPageState extends State<AddUserDataPage> {
                       studentNumber: studentNumber,
                       password: password)
                       .then((value) {
-                    return Navigator.popAndPushNamed(
-                        context, AuthWrapper.routeName);
+                    return Navigator.pushNamedAndRemoveUntil(
+                        context, '/', (route) => false);
                   });
                   showSnackBar(
                       context, 'Student has registered successfully');

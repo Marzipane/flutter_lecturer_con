@@ -167,7 +167,7 @@ class _ReplyTicketPageState extends State<ReplyTicketPage> {
                                       .then((_) =>
                                           Navigator.pushNamedAndRemoveUntil(
                                               context,
-                                              AuthWrapper.routeName,
+                                              '/',
                                               (route) => false));
                                 }
                                 break;
@@ -175,7 +175,7 @@ class _ReplyTicketPageState extends State<ReplyTicketPage> {
                                 updateTicket(ticket: ticket, status: 'D').then(
                                   (_) => Navigator.pushNamedAndRemoveUntil(
                                       context,
-                                      AuthWrapper.routeName,
+                                      '/',
                                       (route) => false),
                                 );
                                 break;

@@ -137,6 +137,7 @@ class MyButton extends StatelessWidget {
           key: formKey,
           child: TextFormField(
             controller: controller,
+            obscureText: true,
             decoration: InputDecoration(
               labelText: 'Password',
               hintText: 'Password ...',
@@ -165,7 +166,7 @@ class MyButton extends StatelessWidget {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text('Cancel',style: TextStyle(color: AppColors.Green))),
+              child: Text('Cancel',style: TextStyle(color: AppColors.ErrorRed))),
           TextButton(onPressed: () {
             if(formKey.currentState!.validate()){
               Navigator.pushNamedAndRemoveUntil(context, ReplyTicketPage.routeName,

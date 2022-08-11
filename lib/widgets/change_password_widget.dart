@@ -85,7 +85,7 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                       addNewPassword(docId: user.uid, password: password)
                           .then((value) {
                         return Navigator.pushNamedAndRemoveUntil(
-                            context, AuthWrapper.routeName, (route) => false);
+                            context, '/', (route) => false);
                       });
                       showSnackBar(
                           context, 'Password is changed successfully');
