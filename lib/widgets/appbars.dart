@@ -3,6 +3,7 @@ import 'package:flutter_lecon/pages/lecturer/ticket_history_page.dart';
 import 'package:flutter_lecon/pages/student/tickets_list_page.dart';
 import '../main.dart';
 import '../pages/general/profile_page.dart';
+import '../pages/general/change_password_page.dart';
 
 class AppBars {
 
@@ -43,12 +44,16 @@ class AppBars {
             case 'history':
               Navigator.popAndPushNamed(context, TicketHistoryPage.routeName);
               break;
+            case 'password':
+              Navigator.popAndPushNamed(context, ChangeLecturerPasswordPage.routeName);
+              break;
             default:
           }
         },
         itemBuilder: (BuildContext context) =>
         <PopupMenuEntry<String>>[
           const PopupMenuItem<String>(
+            padding: EdgeInsets.only(left: 5),
             value: 'reply',
             child: ListTile(
               title: Text('Reply'),
@@ -57,10 +62,19 @@ class AppBars {
             ),
           ),
           const PopupMenuItem<String>(
+            padding: EdgeInsets.only(left: 5),
             value: 'history',
             child: ListTile(
               title: Text('History'),
               trailing: Icon(Icons.history),
+            ),
+          ),
+          const PopupMenuItem<String>(
+            padding: EdgeInsets.only(left: 5),
+            value: 'password',
+            child: ListTile(
+              title: Text('Password'),
+              trailing: Icon(Icons.password),
             ),
           ),
         ],
@@ -149,12 +163,16 @@ class AppBars {
             case 'history':
               Navigator.popAndPushNamed(context, TicketsListPage.routeName);
               break;
+            case 'password':
+              Navigator.popAndPushNamed(context, ChangeStudentPasswordPage.routeName);
+              break;
             default:
           }
         },
         itemBuilder: (BuildContext context) =>
         <PopupMenuEntry<String>>[
           const PopupMenuItem<String>(
+            padding: EdgeInsets.only(left: 5),
             value: 'ask',
             child: ListTile(
               title: Text('Ask'),
@@ -163,10 +181,19 @@ class AppBars {
             ),
           ),
           const PopupMenuItem<String>(
+            padding: EdgeInsets.only(left: 5),
             value: 'history',
             child: ListTile(
               title: Text('History'),
               trailing: Icon(Icons.history),
+            ),
+          ),
+          const PopupMenuItem<String>(
+            padding: EdgeInsets.only(left: 5),
+            value: 'password',
+            child: ListTile(
+              title: Text('Password'),
+              trailing: Icon(Icons.password),
             ),
           ),
         ],

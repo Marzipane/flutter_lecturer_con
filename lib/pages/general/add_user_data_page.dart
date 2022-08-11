@@ -263,8 +263,8 @@ class _AddUserDataPageState extends State<AddUserDataPage> {
                       docId: widget.docId,
                       password: password)
                       .then((value) {
-                    return Navigator.popAndPushNamed(
-                        context, AuthWrapper.routeName);
+                    return Navigator.pushNamedAndRemoveUntil(
+                        context, AuthWrapper.routeName, (route) => false);
                   });
                   showSnackBar(
                       context, 'Lecturer has registered successfully');

@@ -10,6 +10,7 @@ import 'pages/lecturer/lecturer_home_page.dart';
 import 'pages/general/profile_page.dart';
 import 'pages/lecturer/reply_ticket_page.dart';
 import 'pages/student/add_ticket_page.dart';
+import 'pages/general/change_password_page.dart';
 import 'pages/student/student_home_page.dart';
 
 class RouteGenerator {
@@ -53,6 +54,12 @@ class RouteGenerator {
         }
       case AuthWrapper.routeName:{
         return createRoute(page: AuthWrapper());
+      }
+      case ChangeStudentPasswordPage.routeName:{
+        return createRoute(page: ChangeStudentPasswordPage());
+      }
+      case ChangeLecturerPasswordPage.routeName:{
+        return createRoute(page: ChangeLecturerPasswordPage());
       }
       default:
         {
