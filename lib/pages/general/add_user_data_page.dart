@@ -53,6 +53,10 @@ class _AddUserDataPageState extends State<AddUserDataPage> {
             SizedBox(
               height: 20,
             ),
+            Image.network('https://www.gau.edu.tr/storage//uploads/0/0/0/logotr-1580914525.png?vs=1', scale: 2,),
+            SizedBox(
+              height: 20,
+            ),
             Container(
               width: 600,
               child: Form(
