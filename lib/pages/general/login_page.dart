@@ -14,7 +14,6 @@ class LoginPage extends StatelessWidget {
     setPageTitle('Login', context);
     return Scaffold(
       appBar: AppBar(title: const Text('Sign-in'),
-        automaticallyImplyLeading: false,
       ),
       body: SingleChildScrollView(
         child: Center(

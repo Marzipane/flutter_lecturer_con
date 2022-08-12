@@ -20,7 +20,7 @@ class _AddUserDataPageState extends State<AddUserDataPage> {
   bool _hidePass = true;
 
   final TextEditingController _studentNumberController =
-  TextEditingController();
+      TextEditingController();
 
   final TextEditingController _passwordController = TextEditingController();
 
@@ -28,10 +28,14 @@ class _AddUserDataPageState extends State<AddUserDataPage> {
 
   @override
   Widget build(BuildContext context) {
-    setPageTitle(widget.isLecturer ? 'Lecturer | Add data' : 'Student | Add data' , context);
+    setPageTitle(
+        widget.isLecturer ? 'Lecturer | Add data' : 'Student | Add data',
+        context);
     return Scaffold(
       appBar: AppBar(),
-      body: !widget.isLecturer ? buildStudentForm(context) : buildLecturerForm(context),
+      body: !widget.isLecturer
+          ? buildStudentForm(context)
+          : buildLecturerForm(context),
     );
   }
 
@@ -45,15 +49,15 @@ class _AddUserDataPageState extends State<AddUserDataPage> {
             ),
             Text(
               'Student information',
-              style: Theme
-                  .of(context)
-                  .textTheme
-                  .headline4,
+              style: Theme.of(context).textTheme.headline4,
             ),
             SizedBox(
               height: 20,
             ),
-            Image.network('https://www.gau.edu.tr/storage//uploads/0/0/0/logotr-1580914525.png?vs=1', scale: 2,),
+            Image.network(
+              'https://www.gau.edu.tr/storage//uploads/0/0/0/logotr-1580914525.png?vs=1',
+              scale: 2,
+            ),
             SizedBox(
               height: 20,
             ),
@@ -77,12 +81,12 @@ class _AddUserDataPageState extends State<AddUserDataPage> {
                             fontWeight: FontWeight.bold),
                         enabledBorder: OutlineInputBorder(
                             borderRadius:
-                            BorderRadius.all(Radius.circular(10.0)),
+                                BorderRadius.all(Radius.circular(10.0)),
                             borderSide: BorderSide(color: Colors.grey)),
                         // when the field is in focus
                         focusedBorder: OutlineInputBorder(
                             borderRadius:
-                            BorderRadius.all(Radius.circular(10.0)),
+                                BorderRadius.all(Radius.circular(10.0)),
                             borderSide: BorderSide(color: Colors.black)),
                         // isDense: true,
                         // contentPadding: EdgeInsets.all(25),
@@ -132,12 +136,12 @@ class _AddUserDataPageState extends State<AddUserDataPage> {
                         // when the field is not in focus
                         enabledBorder: const OutlineInputBorder(
                             borderRadius:
-                            BorderRadius.all(Radius.circular(10.0)),
+                                BorderRadius.all(Radius.circular(10.0)),
                             borderSide: BorderSide(color: Colors.grey)),
                         // when the field is in focus
                         focusedBorder: const OutlineInputBorder(
                             borderRadius:
-                            BorderRadius.all(Radius.circular(10.0)),
+                                BorderRadius.all(Radius.circular(10.0)),
                             borderSide: BorderSide(color: Colors.black)),
                         errorStyle: TextStyle(
                           fontSize: 16.0,
@@ -166,20 +170,18 @@ class _AddUserDataPageState extends State<AddUserDataPage> {
                   String studentNumber = _studentNumberController.text;
                   String password = _passwordController.text;
                   addStudentData(
-                      docId: widget.docId,
-                      studentNumber: studentNumber,
-                      password: password)
+                          docId: widget.docId,
+                          studentNumber: studentNumber,
+                          password: password)
                       .then((value) {
                     return Navigator.pushNamedAndRemoveUntil(
                         context, '/', (route) => false);
                   });
-                  showSnackBar(
-                      context, 'Student has registered successfully');
+                  showSnackBar(context, 'Student has registered successfully');
                 }
               },
               style: ElevatedButton.styleFrom(
-                  padding:
-                  EdgeInsets.symmetric(vertical: 21, horizontal: 28)),
+                  padding: EdgeInsets.symmetric(vertical: 21, horizontal: 28)),
               child: const Text('Submit')),
         )
       ],
@@ -196,10 +198,7 @@ class _AddUserDataPageState extends State<AddUserDataPage> {
             ),
             Text(
               'Lecturer information',
-              style: Theme
-                  .of(context)
-                  .textTheme
-                  .headline4,
+              style: Theme.of(context).textTheme.headline4,
             ),
             SizedBox(
               height: 20,
@@ -210,7 +209,6 @@ class _AddUserDataPageState extends State<AddUserDataPage> {
                 key: formKey,
                 child: Column(
                   children: [
-
                     TextFormField(
                       controller: _passwordController,
                       obscureText: _hidePass,
@@ -231,12 +229,12 @@ class _AddUserDataPageState extends State<AddUserDataPage> {
                         // when the field is not in focus
                         enabledBorder: const OutlineInputBorder(
                             borderRadius:
-                            BorderRadius.all(Radius.circular(10.0)),
+                                BorderRadius.all(Radius.circular(10.0)),
                             borderSide: BorderSide(color: Colors.grey)),
                         // when the field is in focus
                         focusedBorder: const OutlineInputBorder(
                             borderRadius:
-                            BorderRadius.all(Radius.circular(10.0)),
+                                BorderRadius.all(Radius.circular(10.0)),
                             borderSide: BorderSide(color: Colors.black)),
                         errorStyle: TextStyle(
                           fontSize: 16.0,
@@ -263,20 +261,16 @@ class _AddUserDataPageState extends State<AddUserDataPage> {
               onPressed: () {
                 if (formKey.currentState!.validate()) {
                   String password = _passwordController.text;
-                  addLecturerData(
-                      docId: widget.docId,
-                      password: password)
+                  addLecturerData(docId: widget.docId, password: password)
                       .then((value) {
                     return Navigator.pushNamedAndRemoveUntil(
                         context, AuthWrapper.routeName, (route) => false);
                   });
-                  showSnackBar(
-                      context, 'Lecturer has registered successfully');
+                  showSnackBar(context, 'Lecturer has registered successfully');
                 }
               },
               style: ElevatedButton.styleFrom(
-                  padding:
-                  EdgeInsets.symmetric(vertical: 21, horizontal: 28)),
+                  padding: EdgeInsets.symmetric(vertical: 21, horizontal: 28)),
               child: const Text('Submit')),
         )
       ],
@@ -299,9 +293,8 @@ Future addStudentData(
   final docTicket = FirebaseFirestore.instance.collection('users').doc(docId);
   docTicket.update({'studentNumber': studentNumber, 'password': password});
 }
-Future addLecturerData(
-    {required docId, required password}) async {
+
+Future addLecturerData({required docId, required password}) async {
   final docTicket = FirebaseFirestore.instance.collection('users').doc(docId);
   docTicket.update({'password': password});
 }
-
