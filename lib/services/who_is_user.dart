@@ -1,6 +1,6 @@
-bool isLecturer(String email) {
+bool isLecturer(String? email) {
   return RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@gau.edu.tr")
-      .hasMatch(email);
+      .hasMatch(email!);
 }
 
 bool isStudent(String? email) {
