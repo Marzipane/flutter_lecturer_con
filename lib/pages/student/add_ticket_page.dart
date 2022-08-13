@@ -95,9 +95,10 @@ class _AddTicketPageState extends State<AddTicketPage> {
                   height: 10,
                 ),
                 TextFormField(
+                  minLines: 4,
                   controller: _descController,
                   maxLength: descLength,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     labelText: 'Description',
                     hintText: 'Enter description ...',
                     enabledBorder: OutlineInputBorder(

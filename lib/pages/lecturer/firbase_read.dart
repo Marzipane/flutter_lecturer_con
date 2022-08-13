@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_lecon/pages/general/home_page.dart';
 import 'package:flutter_lecon/pages/general/profile_page.dart';
 
 import '../../common/app_theme.dart';
 import '../../models/users_instance_model.dart';
+import '../student/student_home_page.dart';
 
 StreamBuilder<List> buildStreamBuilder(studentUid) {
   return StreamBuilder<List<UserInstance>>(
@@ -130,18 +132,20 @@ StreamBuilder<List> buildProfileStreamBuilder(
                                 'Submit',
                                 style: TextStyle(color: AppColors.Green),
                               ),
-                              onPressed: () {
-                                updatePhotoURL(
+                              onPressed: () async {
+                                await updatePhotoURL(
                                     docId: user.uid,
                                     photoURL: urlController.text);
-                                firebaseUser.updatePhotoURL(urlController.text);
+                                await firebaseUser.updatePhotoURL(urlController.text);
                                 urlController.text = '';
                                 if (user.isLecturer) {
-                                  Navigator.popAndPushNamed(
-                                      context, LecturerProfilePage.routeName);
+                                  ((){
+                                    Navigator.popAndPushNamed(
+                                      context, LecturerProfilePage.routeName);}());
                                 } else {
-                                  Navigator.popAndPushNamed(
-                                      context, StudentProfilePage.routeName);
+                                  ((){
+                                    Navigator.popAndPushNamed(
+                                      context, StudentProfilePage.routeName);}());
                                 }
                               },
                             ),
