@@ -52,7 +52,10 @@ class FirebaseAuthMethods {
         // CHECK NEW GUYS
         if (userCredential.user != null) {
           if (userCredential.additionalUserInfo!.isNewUser) {
-            addUser(googleUser: userCredential);
+            if(isLecturer(userCredential.user!.email) || isStudent(userCredential.user!.email)){
+              addUser(googleUser: userCredential);
+            }
+
           }
         }
 

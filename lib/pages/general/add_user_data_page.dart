@@ -32,7 +32,9 @@ class _AddUserDataPageState extends State<AddUserDataPage> {
         widget.isLecturer ? 'Lecturer | Add data' : 'Student | Add data',
         context);
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text('Add Information'),
+      ),
       body: !widget.isLecturer
           ? buildStudentForm(context)
           : buildLecturerForm(context),

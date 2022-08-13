@@ -22,7 +22,7 @@ class RouteGenerator {
         }
       case LoginPage.routeName:
         {
-          return createRoute(page: const LoginPage());
+          return createRoute(page: LoginPage());
         }
       case AddTicketPage.routeName:
         {

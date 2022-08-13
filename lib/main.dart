@@ -5,6 +5,8 @@ import 'package:flutter_lecon/common/app_theme.dart';
 import 'package:flutter_lecon/pages/general/add_user_data_page.dart';
 import 'package:flutter_lecon/pages/student/student_home_page.dart';
 import 'package:flutter_lecon/services/firebase_auth_methods.dart';
+import 'package:flutter_lecon/utils/show_snackbar.dart';
+import 'package:flutter_lecon/widgets/alertDialog.dart';
 import 'package:provider/provider.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'firebase_options.dart';
@@ -47,6 +49,8 @@ class AuthWrapper extends StatelessWidget {
     CollectionReference users = FirebaseFirestore.instance.collection('users');
     final firebaseUser = context.watch<User?>();
     String? email = firebaseUser?.email;
+    final auth = context.read<FirebaseAuthMethods>();
+
 
     if (firebaseUser != null) {
       return FutureBuilder(
@@ -58,7 +62,11 @@ class AuthWrapper extends StatelessWidget {
             }
 
             if (snapshot.hasData && !snapshot.data!.exists) {
-              return const Text("Document does not exist");
+              return AppAlertDialog(text: 'Use GAU email', submitBtnFunc: ((){
+                auth.signOut(context).then((value) =>
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, '/', (route) => false));
+              }),);
             }
 
             if (snapshot.connectionState == ConnectionState.done) {
@@ -93,6 +101,6 @@ class AuthWrapper extends StatelessWidget {
             );
           });
     }
-    return const LoginPage();
+    return  LoginPage();
   }
 }
