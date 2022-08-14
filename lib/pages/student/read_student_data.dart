@@ -19,9 +19,9 @@ StreamBuilder<List> buildStudentStreamBuilder(studentUid) {
                   !user.isLecturer ?
                   Text(
                   'Student №: ${user.studentNumber ?? 'Not found'}',
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 12, fontStyle: FontStyle.italic),
-                  ): SizedBox.shrink(),
+                  ): const SizedBox.shrink(),
             ],
           ),
         ))

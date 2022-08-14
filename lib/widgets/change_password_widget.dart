@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../common/app_theme.dart';
-import '../main.dart';
 import '../services/firebase_auth_methods.dart';
 import '../utils/show_snackbar.dart';
 
@@ -16,28 +15,34 @@ class ChangePasswordWidget extends StatefulWidget {
 
 class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
   final TextEditingController _changePasswordController =
-  TextEditingController();
+      TextEditingController();
   final formKey = GlobalKey<FormState>();
   bool _hidePass = true;
 
   @override
   Widget build(BuildContext context) {
+    bool isDesktop(BuildContext context) =>
+        MediaQuery.of(context).size.width >= 600;
     final user = context.read<FirebaseAuthMethods>().user;
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Container(
-          width: 600,
+        SizedBox(
+          width: isDesktop(context)
+              ? 600
+              : MediaQuery.of(context).size.width * 0.8,
           child: Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Text(
                 'Enter new password',
-                style: Theme.of(context).textTheme.headline3,
+                style: isDesktop(context)
+                    ? Theme.of(context).textTheme.headline4
+                    : Theme.of(context).textTheme.headline5,
               ),
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               Form(
                 key: formKey,
                 child: TextFormField(
@@ -48,9 +53,8 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                     hintText: 'Password ...',
                     icon: const Icon(Icons.security),
                     suffixIcon: IconButton(
-                      icon: Icon(_hidePass
-                          ? Icons.visibility
-                          : Icons.visibility_off),
+                      icon: Icon(
+                          _hidePass ? Icons.visibility : Icons.visibility_off),
                       onPressed: () {
                         setState(() {
                           _hidePass = !_hidePass;
@@ -65,7 +69,7 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                     focusedBorder: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10.0)),
                         borderSide: BorderSide(color: Colors.black)),
-                    errorStyle: TextStyle(
+                    errorStyle: const TextStyle(
                       fontSize: 16.0,
                       fontWeight: FontWeight.bold,
                       color: AppColors.ErrorRed,
@@ -77,7 +81,7 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                   validator: (String? value) => _validatePassword(value),
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               ElevatedButton(
                   onPressed: () {
                     if (formKey.currentState!.validate()) {
@@ -87,17 +91,17 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                         return Navigator.pushNamedAndRemoveUntil(
                             context, '/', (route) => false);
                       });
-                      showSnackBar(
-                          context, 'Password is changed successfully');
+                      showSnackBar(context, 'Password is changed successfully');
                     }
                   },
-                  child: Text('Submit'))
+                  child: const Text('Submit'))
             ],
           ),
         ),
       ],
     );
   }
+
   _validatePassword(String? value) {
     final RegExp passRegExp = RegExp(r"(?=.*\d)(?=.*[a-z])(?=.*[A-Z])");
     if (value!.isEmpty) {

@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_lecon/common/app_theme.dart';
-import 'package:flutter_lecon/main.dart';
 import 'package:provider/provider.dart';
 import '../../common/set_page_title.dart';
 import '../../models/ticket_model.dart';
@@ -58,7 +57,7 @@ class _AddTicketPageState extends State<AddTicketPage> {
                   'To: ${teacher.email}',
                   style: Theme.of(context).textTheme.headline6,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 TextFormField(
@@ -98,7 +97,7 @@ class _AddTicketPageState extends State<AddTicketPage> {
                   minLines: 4,
                   controller: _descController,
                   maxLength: descLength,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Description',
                     hintText: 'Enter description ...',
                     enabledBorder: OutlineInputBorder(
@@ -151,7 +150,7 @@ class _AddTicketPageState extends State<AddTicketPage> {
                         }
                       },
                       style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.symmetric(
+                          padding: const EdgeInsets.symmetric(
                               vertical: 20, horizontal: 25)),
                       child: const Text('Submit')),
                 )

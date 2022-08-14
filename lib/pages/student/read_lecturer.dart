@@ -10,16 +10,19 @@ StreamBuilder<List> buildLecturerStreamBuilder(teacherUid) {
       if (snapshot.hasData) {
         final users = snapshot.data!;
         return Row(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: users
               .map((user) => Center(
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                      // crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
+                        Image.network(user.photoURL ?? 'Not Found', height: 225, width: 230),
                         // Text(user.displayName ?? 'Not found', style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic  ),),
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Text(
+
+                            const Text(
                               'To: ',
                               style: TextStyle(
                                 fontSize: 16,
@@ -29,7 +32,7 @@ StreamBuilder<List> buildLecturerStreamBuilder(teacherUid) {
                             ),
                             Text(
                               '@${user.displayName}',
-                              style: TextStyle(fontSize: 14),
+                              style: const TextStyle(fontSize: 14),
                             ),
                           ],
                         ),

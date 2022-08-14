@@ -5,7 +5,6 @@ import 'package:flutter_lecon/common/app_theme.dart';
 import 'package:flutter_lecon/pages/general/add_user_data_page.dart';
 import 'package:flutter_lecon/pages/student/student_home_page.dart';
 import 'package:flutter_lecon/services/firebase_auth_methods.dart';
-import 'package:flutter_lecon/utils/show_snackbar.dart';
 import 'package:flutter_lecon/widgets/alertDialog.dart';
 import 'package:provider/provider.dart';
 import 'package:url_strategy/url_strategy.dart';
@@ -40,7 +39,6 @@ void main() async {
 }
 
 class AuthWrapper extends StatelessWidget {
-  static const routeName = '/auth-wrapper';
 
   const AuthWrapper({Key? key}) : super(key: key);
 
@@ -48,7 +46,6 @@ class AuthWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     CollectionReference users = FirebaseFirestore.instance.collection('users');
     final firebaseUser = context.watch<User?>();
-    String? email = firebaseUser?.email;
     final auth = context.read<FirebaseAuthMethods>();
 
 
@@ -101,6 +98,6 @@ class AuthWrapper extends StatelessWidget {
             );
           });
     }
-    return  LoginPage();
+    return  const LoginPage();
   }
 }

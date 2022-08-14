@@ -1,11 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_lecon/pages/general/home_page.dart';
 import 'package:flutter_lecon/pages/general/profile_page.dart';
 
 import '../../common/app_theme.dart';
 import '../../models/users_instance_model.dart';
-import '../student/student_home_page.dart';
 
 StreamBuilder<List> buildStreamBuilder(studentUid) {
   return StreamBuilder<List<UserInstance>>(
@@ -22,7 +20,8 @@ StreamBuilder<List> buildStreamBuilder(studentUid) {
                       children: [
                         Image.network(
                           user.photoURL ?? 'Not found',
-                          height: 200,
+                          height: 225,
+                          width: 225,
                         ),
                         Text(
                           user.displayName ?? 'Not found',
@@ -100,24 +99,18 @@ StreamBuilder<List> buildProfileStreamBuilder(
                                             hintText: 'Image URL ...',
                                             prefixIcon: Icon(Icons.image),
                                             // when the field is not in focus
-                                            enabledBorder:
-                                                OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                10.0)),
-                                                    borderSide: BorderSide(
-                                                        color: Colors.grey)),
+                                            enabledBorder: OutlineInputBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(10.0)),
+                                                borderSide: BorderSide(
+                                                    color: Colors.grey)),
                                             // when the field is in focus
-                                            focusedBorder:
-                                                OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                10.0)),
-                                                    borderSide: BorderSide(
-                                                        color: Colors.black)),
-                                            errorStyle:  TextStyle(
+                                            focusedBorder: OutlineInputBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(10.0)),
+                                                borderSide: BorderSide(
+                                                    color: Colors.black)),
+                                            errorStyle: TextStyle(
                                               fontSize: 16.0,
                                               fontWeight: FontWeight.bold,
                                               color: AppColors.ErrorRed,
@@ -176,8 +169,8 @@ StreamBuilder<List> buildProfileStreamBuilder(
                     ),
                     Text(
                       user.displayName.toString(),
-                      style:
-                          const TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 28),
                     ),
                     const SizedBox(
                       height: 8,
@@ -196,7 +189,11 @@ StreamBuilder<List> buildProfileStreamBuilder(
                             height: 8,
                           )
                         : const SizedBox.shrink(),
-                    Text(user.email.toString(), style: const TextStyle(color: AppColors.Gold, fontSize: 12),),
+                    Text(
+                      user.email.toString(),
+                      style:
+                          const TextStyle(color: AppColors.Gold, fontSize: 12),
+                    ),
                   ],
                 ),
               )
