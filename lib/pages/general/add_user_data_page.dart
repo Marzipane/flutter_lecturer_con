@@ -2,15 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_lecon/common/app_theme.dart';
-import 'package:flutter_lecon/main.dart';
 import '../../common/set_page_title.dart';
 import '../../utils/show_snackbar.dart';
 
 class AddUserDataPage extends StatefulWidget {
-  AddUserDataPage({Key? key, required this.docId, required this.isLecturer})
+  const AddUserDataPage({Key? key, required this.docId, required this.isLecturer})
       : super(key: key);
-  final docId;
-  final isLecturer;
+  final String docId;
+  final bool isLecturer;
 
   @override
   State<AddUserDataPage> createState() => _AddUserDataPageState();
@@ -33,11 +32,13 @@ class _AddUserDataPageState extends State<AddUserDataPage> {
         context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Information'),
+        title: const Text('Add Information'),
       ),
-      body: !widget.isLecturer
-          ? buildStudentForm(context)
-          : buildLecturerForm(context),
+      body: SingleChildScrollView(
+        child: !widget.isLecturer
+            ? buildStudentForm(context)
+            : buildLecturerForm(context),
+      ),
     );
   }
 
@@ -46,24 +47,24 @@ class _AddUserDataPageState extends State<AddUserDataPage> {
       children: [
         Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Text(
               'Student information',
               style: Theme.of(context).textTheme.headline4,
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Image.network(
               'https://www.gau.edu.tr/storage//uploads/0/0/0/logotr-1580914525.png?vs=1',
               scale: 2,
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
-            Container(
+            SizedBox(
               width: 600,
               child: Form(
                 key: formKey,
@@ -115,7 +116,7 @@ class _AddUserDataPageState extends State<AddUserDataPage> {
                         FilteringTextInputFormatter.digitsOnly
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     TextFormField(
@@ -145,7 +146,7 @@ class _AddUserDataPageState extends State<AddUserDataPage> {
                             borderRadius:
                                 BorderRadius.all(Radius.circular(10.0)),
                             borderSide: BorderSide(color: Colors.black)),
-                        errorStyle: TextStyle(
+                        errorStyle: const TextStyle(
                           fontSize: 16.0,
                           fontWeight: FontWeight.bold,
                           color: AppColors.ErrorRed,
@@ -162,7 +163,7 @@ class _AddUserDataPageState extends State<AddUserDataPage> {
             ),
           ],
         ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
         Center(
@@ -183,7 +184,7 @@ class _AddUserDataPageState extends State<AddUserDataPage> {
                 }
               },
               style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(vertical: 21, horizontal: 28)),
+                  padding: const EdgeInsets.symmetric(vertical: 21, horizontal: 28)),
               child: const Text('Submit')),
         )
       ],
@@ -195,17 +196,17 @@ class _AddUserDataPageState extends State<AddUserDataPage> {
       children: [
         Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Text(
               'Lecturer information',
               style: Theme.of(context).textTheme.headline4,
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
-            Container(
+            SizedBox(
               width: 600,
               child: Form(
                 key: formKey,
@@ -238,7 +239,7 @@ class _AddUserDataPageState extends State<AddUserDataPage> {
                             borderRadius:
                                 BorderRadius.all(Radius.circular(10.0)),
                             borderSide: BorderSide(color: Colors.black)),
-                        errorStyle: TextStyle(
+                        errorStyle: const TextStyle(
                           fontSize: 16.0,
                           fontWeight: FontWeight.bold,
                           color: AppColors.ErrorRed,
@@ -255,7 +256,7 @@ class _AddUserDataPageState extends State<AddUserDataPage> {
             ),
           ],
         ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
         Center(
@@ -266,13 +267,13 @@ class _AddUserDataPageState extends State<AddUserDataPage> {
                   addLecturerData(docId: widget.docId, password: password)
                       .then((value) {
                     return Navigator.pushNamedAndRemoveUntil(
-                        context, AuthWrapper.routeName, (route) => false);
+                        context, '/', (route) => false);
                   });
                   showSnackBar(context, 'Lecturer has registered successfully');
                 }
               },
               style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(vertical: 21, horizontal: 28)),
+                  padding: const EdgeInsets.symmetric(vertical: 21, horizontal: 28)),
               child: const Text('Submit')),
         )
       ],

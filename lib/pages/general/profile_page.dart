@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 import '../../common/set_page_title.dart';
 import '../../widgets/profile_body.dart';
 
-
 class LecturerProfilePage extends StatelessWidget {
   static const routeName = '/lecturer-profile-page';
   const LecturerProfilePage({Key? key}) : super(key: key);
@@ -18,13 +17,13 @@ class LecturerProfilePage extends StatelessWidget {
     final auth = context.read<FirebaseAuthMethods>();
 
     return Scaffold(
-      appBar: AppBars().builtLecturerAppBar(user: user, context: context, title: 'Profile page', auth: auth),
+      appBar: AppBars().builtLecturerAppBar(
+          user: user, context: context, title: 'Profile', auth: auth),
       body: ProfileBody(user: user),
       backgroundColor: AppColors.LightSilver,
     );
   }
 }
-
 
 class StudentProfilePage extends StatelessWidget {
   static const routeName = '/student-profile-page';
@@ -37,10 +36,10 @@ class StudentProfilePage extends StatelessWidget {
     final auth = context.read<FirebaseAuthMethods>();
 
     return Scaffold(
-      appBar: AppBars().builtStudentAppBar(user: user, context: context, title: 'Profile page', auth: auth),
+      appBar: AppBars().builtStudentAppBar(
+          user: user, context: context, title: 'Profile', auth: auth),
       body: ProfileBody(user: user),
       backgroundColor: AppColors.LightSilver,
     );
   }
 }
-

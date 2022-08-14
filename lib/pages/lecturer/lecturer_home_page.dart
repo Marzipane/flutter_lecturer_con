@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_lecon/common/set_page_title.dart';
@@ -33,7 +32,7 @@ class LecturerHomePage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: 10,),
+            const SizedBox(height: 10,),
             StreamBuilder<List<Ticket>>(
               stream: readTickets(user: user),
               builder: (context, snapshot) {
@@ -81,14 +80,14 @@ class LecturerHomePage extends StatelessWidget {
       decoration: AppBoxDecoration().all(),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           buildStreamBuilder(studentUid),
-          Divider(),
-          SizedBox(
+          const Divider(),
+          const SizedBox(
             height: 5,
           ),
-          Text('Title: ${ticket.title ?? 'Null'}', style: TextStyle(fontSize: 18),),
-          SizedBox(height: 5,),
-          Text('${ticket.status}', style: TextStyle(fontSize: 12),),
-          SizedBox(
+          Text('Title: ${ticket.title ?? 'Null'}', style: const TextStyle(fontSize: 18),),
+          const SizedBox(height: 5,),
+          Text('${ticket.status}', style: const TextStyle(fontSize: 12),),
+          const SizedBox(
             height: 5,
           ),
           Center(
@@ -104,7 +103,7 @@ class LecturerHomePage extends StatelessWidget {
   }
 }
 class MyButton extends StatelessWidget {
-  MyButton(
+  const MyButton(
       {Key? key,
         required this.ticket,
         required this.password,
@@ -112,15 +111,13 @@ class MyButton extends StatelessWidget {
         required this.controller})
       : super(key: key);
   final Ticket ticket;
-  String password;
+  final String password;
   final formKey;
-  TextEditingController controller;
+  final TextEditingController controller;
 
 
   @override
   Widget build(BuildContext context) {
-    CollectionReference users = FirebaseFirestore.instance.collection('users');
-    final firebaseUser = context.watch<User?>();
     return ElevatedButton(
         onPressed: () {
           buildPasswordConfirmation(context);
@@ -132,20 +129,20 @@ class MyButton extends StatelessWidget {
     return showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Password Confirmation'),
+        title: const Text('Password Confirmation'),
         content: Form(
           key: formKey,
           child: TextFormField(
             controller: controller,
             obscureText: true,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               labelText: 'Password',
               hintText: 'Password ...',
-              enabledBorder: const OutlineInputBorder(
+              enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
                   borderSide: BorderSide(color: Colors.grey)),
               // when the field is in focus
-              focusedBorder: const OutlineInputBorder(
+              focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
                   borderSide: BorderSide(color: Colors.black)),
               errorStyle: TextStyle(
@@ -166,13 +163,13 @@ class MyButton extends StatelessWidget {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text('Cancel',style: TextStyle(color: AppColors.ErrorRed))),
+              child: const Text('Cancel',style: TextStyle(color: AppColors.ErrorRed))),
           TextButton(onPressed: () {
             if(formKey.currentState!.validate()){
               Navigator.pushNamedAndRemoveUntil(context, ReplyTicketPage.routeName,
                   arguments: {'ticket': ticket}, (route) => false);
             }
-          }, child: Text('Confirm',style: TextStyle(color: AppColors.Green))),
+          }, child: const Text('Confirm',style: TextStyle(color: AppColors.Green))),
         ],
       ),
     );

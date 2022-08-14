@@ -1,16 +1,14 @@
-import 'dart:html';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../common/set_page_title.dart';
 import '../../services/firebase_auth_methods.dart';
-import '../../utils/show_snackbar.dart';
 import '../../widgets/google_login_button.dart';
 
 class LoginPage extends StatefulWidget {
   static const routeName = '/login-page';
-  String snackBarmsg;
-  LoginPage({Key? key, this.snackBarmsg = "312312321"}) : super(key: key);
+  final String snackBarmsg;
+  const LoginPage({Key? key, this.snackBarmsg = ""}) : super(key: key);
 
   @override
   State<LoginPage> createState() => _LoginPageState();

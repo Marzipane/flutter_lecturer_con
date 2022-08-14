@@ -68,64 +68,64 @@ class TicketHistoryPage extends StatelessWidget {
       decoration: AppBoxDecoration().all(),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         buildStreamBuilder(ticket.studentUid),
-        SizedBox(
+        const SizedBox(
           height: 5,
         ),
         Row(
           children: [
-            Text(
+            const Text(
               'Title: ',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             Text(
               ticket.title ?? 'Null',
-              style: TextStyle(fontSize: 14),
+              style: const TextStyle(fontSize: 14),
             )
           ],
         ),
-        SizedBox(
+        const SizedBox(
           height: 5,
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'Description: ',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             Text(
               ticket.description ?? 'Null',
-              style: TextStyle(fontSize: 14),
+              style: const TextStyle(fontSize: 14),
             ),
             ticket.status == "Answered" ?
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   'Reply: ',
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 3,
                 ),
 
                 Text(
                   ticket.reply ?? 'Null',
-                  style: TextStyle(fontSize: 14),
+                  style: const TextStyle(fontSize: 14),
                 )
               ],
-            ): SizedBox.shrink(),
+            ): const SizedBox.shrink(),
 
           ],
         ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
-        Divider(
+        const Divider(
           thickness: 2,
         ),
         Center(child: Text('${ticket.status}', style: TextStyle(color: ticket.status == 'Discarded' ? AppColors.LightRed: AppColors.Green, fontWeight: FontWeight.bold))),
-        SizedBox(
+        const SizedBox(
           height: 5,
         ),
       ]),

@@ -10,7 +10,7 @@ class ChangeStudentPasswordPage extends StatelessWidget {
 
   static const routeName = '/change-student-password-page';
 
-  ChangeStudentPasswordPage({Key? key}) : super(key: key);
+  const ChangeStudentPasswordPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     setPageTitle('Student | Password', context);
@@ -19,7 +19,7 @@ class ChangeStudentPasswordPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBars().builtStudentAppBar(
           user: user, context: context, title: 'Password', auth: auth),
-      body: ChangePasswordWidget()
+      body: const ChangePasswordWidget()
     );
   }
 
@@ -30,7 +30,7 @@ class ChangeLecturerPasswordPage extends StatelessWidget {
 
   static const routeName = '/change-lecturer-password-page';
 
-  ChangeLecturerPasswordPage({Key? key}) : super(key: key);
+  const ChangeLecturerPasswordPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     setPageTitle('Lecturer | Password', context);
@@ -39,7 +39,7 @@ class ChangeLecturerPasswordPage extends StatelessWidget {
     return Scaffold(
         appBar: AppBars().builtLecturerAppBar(
             user: user, context: context, title: 'Password', auth: auth),
-        body: ChangePasswordWidget()
+        body: const ChangePasswordWidget()
     );
   }
 

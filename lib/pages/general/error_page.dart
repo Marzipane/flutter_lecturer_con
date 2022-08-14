@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_lecon/main.dart';
 
 import '../../common/set_page_title.dart';
 
@@ -21,9 +20,7 @@ class ErrorPage extends StatelessWidget {
             bottom: 200,
             left: 24,
             right: 24,
-            child: Container(
-              child: Image.asset('images/errorPageBack.png'),
-            ),
+            child: Image.asset('images/errorPageBack.png'),
           ),
           Positioned(
             top: 150,
@@ -40,7 +37,7 @@ class ErrorPage extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 50,
                       letterSpacing: 2,
-                      color: const Color(0xff2f3640),
+                      color: Color(0xff2f3640),
                       fontFamily: 'Anton',
                       fontWeight: FontWeight.bold),
                 ),
@@ -51,7 +48,7 @@ class ErrorPage extends StatelessWidget {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 30,
-                        color: const Color(0xff2f3640),
+                        color:  Color(0xff2f3640),
                       ),
                     ),
                     MouseRegion(
@@ -61,7 +58,7 @@ class ErrorPage extends StatelessWidget {
                           Navigator.popAndPushNamed(
                               context, '/');
                         },
-                        child: Text(
+                        child: const Text(
                           'Go to Log In page',
                           style: TextStyle(
                             color: Colors.blue,

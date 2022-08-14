@@ -4,7 +4,6 @@ import 'package:flutter_lecon/pages/lecturer/ticket_history_page.dart';
 import 'package:flutter_lecon/pages/student/tickets_list_page.dart';
 import 'common/create_route.dart';
 import 'pages/general/error_page.dart';
-import 'pages/general/home_page.dart';
 import 'pages/general/login_page.dart';
 import 'pages/lecturer/lecturer_home_page.dart';
 import 'pages/general/profile_page.dart';
@@ -22,7 +21,7 @@ class RouteGenerator {
         }
       case LoginPage.routeName:
         {
-          return createRoute(page: LoginPage());
+          return createRoute(page: const LoginPage());
         }
       case AddTicketPage.routeName:
         {
@@ -57,10 +56,10 @@ class RouteGenerator {
           return createRoute(page: TicketHistoryPage());
         }
       case ChangeStudentPasswordPage.routeName:{
-        return createRoute(page: ChangeStudentPasswordPage());
+        return createRoute(page: const ChangeStudentPasswordPage());
       }
       case ChangeLecturerPasswordPage.routeName:{
-        return createRoute(page: ChangeLecturerPasswordPage());
+        return createRoute(page: const ChangeLecturerPasswordPage());
       }
       default:
         {

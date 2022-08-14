@@ -30,7 +30,7 @@ class TicketsListPage extends StatelessWidget {
               final tickets = snapshot.data!;
               return Center(
                 child: SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.7,
+                  width: MediaQuery.of(context).size.width * 0.8,
                   child: Wrap(
                       crossAxisAlignment: WrapCrossAlignment.start,
                       alignment: WrapAlignment.spaceAround,
@@ -67,60 +67,60 @@ class TicketsListPage extends StatelessWidget {
       decoration: AppBoxDecoration().all(),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         buildLecturerStreamBuilder(ticket.teacherUid),
-        SizedBox(
+        const SizedBox(
           height: 5,
         ),
         Row(
           children: [
-            Text(
+            const Text(
               'Title: ',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             Text(
               ticket.title ?? 'Null',
-              style: TextStyle(fontSize: 14),
+              style: const TextStyle(fontSize: 14),
             )
           ],
         ),
-        SizedBox(
+        const SizedBox(
           height: 5,
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'Description: ',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             Text(
               ticket.description ?? 'Null',
-              style: TextStyle(fontSize: 14),
+              style: const TextStyle(fontSize: 14),
               // TODO: THIS IS TEXT WRAP
               maxLines: 5,
               overflow: TextOverflow.ellipsis,
               softWrap: false,
             ),
-            SizedBox(
+            const SizedBox(
               height: 3,
             ),
-            Text(
+            const Text(
               'Reply: ',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
-            SizedBox(
+            const SizedBox(
               height: 3,
             ),
             ticket.status == "Answered" ?
             Text(
               ticket.reply ?? 'Null',
-              style: TextStyle(fontSize: 14),
-            ): Text('No reply yet')
+              style: const TextStyle(fontSize: 14),
+            ): const Text('No reply yet')
           ],
         ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
-        Divider(
+        const Divider(
           thickness: 2,
         ),
         Center(
@@ -130,12 +130,12 @@ class TicketsListPage extends StatelessWidget {
               color: ticket.status == 'Answered'
                   ? AppColors.Green
                   : ticket.status == 'Not read yet'
-                      ? Color.fromRGBO(215, 213, 213, 1.0)
+                      ? const Color.fromRGBO(215, 213, 213, 1.0)
                       : ticket.status == 'Evaluated'
                           ? AppColors.Gold
                           : AppColors.LightRed),
         )),
-        SizedBox(
+        const SizedBox(
           height: 5,
         ),
       ]),
