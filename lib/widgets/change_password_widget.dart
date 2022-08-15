@@ -32,7 +32,9 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
               ? 600
               : MediaQuery.of(context).size.width * 0.8,
           child: Column(
+
             children: [
+
               const SizedBox(
                 height: 20,
               ),
