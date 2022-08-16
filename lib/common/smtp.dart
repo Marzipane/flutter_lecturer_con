@@ -1,25 +1,15 @@
-import 'package:mailer/mailer.dart';
-import 'package:mailer/smtp_server.dart';
+import 'package:sendgrid_mailer/sendgrid_mailer.dart';
 
-void sendSmtp()  async {
-  String username = 'loolikwoow@gmail.com';
-  String password = 'mi2LkcKYZkLJ';
+void sendSmtp(toEmail, text, subject)  async {
+  final mailer = Mailer('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');
+  var toAddress = Address('${toEmail}');
+  final fromAddress = Address('ibrahim.abukeer@std.gau.edu.tr');
+  final content = Content('text/plain', '${text}');
+  final personalization = Personalization([toAddress]);
 
-  final smtpServer = SmtpServer('smtp-pulse.com',port: 465,password: password, ssl: true,allowInsecure: true, username:username,);
-
-  final message = Message()
-    ..from = Address('roman.chernogorov@std.gau.edu.tr', 'ROMAN')
-    ..recipients.add('destination@example.com')
-    ..subject = 'Test Dart Mailer library :: 😀 :: ${DateTime.now()}'
-    ..text = 'This is the plain text.\nThis is line 2 of the text part.';
-
-  try {
-    final sendReport = await send(message, smtpServer);
-    print('Message sent: ' + sendReport.toString());
-  } on MailerException catch (e) {
-    print('Message not sent.');
-    for (var p in e.problems) {
-      print('Problem: ${p.code}: ${p.msg}');
-    }
-  }
+  final email =
+  Email([personalization], fromAddress, subject, content: [content]);
+  mailer.send(email).then((result) {
+    print(result);
+  });
 }
