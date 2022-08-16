@@ -1,6 +1,6 @@
 import 'package:sendgrid_mailer/sendgrid_mailer.dart';
 
-void sendSmtp(toEmail, text, subject)  async {
+void sendSmtp({toEmail, text, subject})  async {
   final mailer = Mailer('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');
   var toAddress = Address('${toEmail}');
   final fromAddress = Address('ibrahim.abukeer@std.gau.edu.tr');
