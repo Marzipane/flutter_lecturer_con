@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:sendgrid_mailer/sendgrid_mailer.dart';
 
 void sendSmtp({toEmail, text, subject})  async {
@@ -7,9 +9,19 @@ void sendSmtp({toEmail, text, subject})  async {
   final content = Content('text/plain', '${text}');
   final personalization = Personalization([toAddress]);
 
+  var headers = Map<String, String>();
+  headers['Access-Control-Allow-Origin'] = '*';
+  headers['Access-Control-Allow-Headers'] = 'Access-Control-Allow-Origin, Accept';
+  headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS, PUT, PATCH, DELETE' ;
+  headers['Access-Control-Allow-Headers'] = 'X-Requested-With,content-type' ;
+  headers['Access-Control-Allow-Credentials'] = 'true' ;
+
+
+
   final email =
-  Email([personalization], fromAddress, subject, content: [content]);
+  Email([personalization], fromAddress, subject, content: [content], headers: headers);
   mailer.send(email).then((result) {
     print(result);
+    print(result.isError);
   });
 }
