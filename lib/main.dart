@@ -74,6 +74,7 @@ class AuthWrapper extends StatelessWidget {
                 if (data['isLecturer']) {
                   if (data['password'] == null) {
                     return AddUserDataPage(
+                      user: data,
                         docId: firebaseUser.uid,
                         isLecturer: data['isLecturer']);
                   }
@@ -84,6 +85,7 @@ class AuthWrapper extends StatelessWidget {
                   if (data['studentNumber'] == null ||
                       data['password'] == null) {
                     return AddUserDataPage(
+                      user : data ,
                         docId: firebaseUser.uid,
                         isLecturer: data['isLecturer']);
                   }

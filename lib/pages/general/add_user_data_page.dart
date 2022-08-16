@@ -2,14 +2,19 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_lecon/common/app_theme.dart';
+import 'package:flutter_lecon/models/users_instance_model.dart';
 import '../../common/set_page_title.dart';
+import '../../common/smtp.dart';
+import '../../common/text_data.dart';
 import '../../utils/show_snackbar.dart';
 
 class AddUserDataPage extends StatefulWidget {
-  const AddUserDataPage({Key? key, required this.docId, required this.isLecturer})
+
+  const AddUserDataPage({Key? key, required this.docId, required this.isLecturer, required this.user})
       : super(key: key);
   final String docId;
   final bool isLecturer;
+  final user;
 
   @override
   State<AddUserDataPage> createState() => _AddUserDataPageState();
@@ -173,6 +178,7 @@ class _AddUserDataPageState extends State<AddUserDataPage> {
                   String studentNumber = _studentNumberController.text;
                   String password = _passwordController.text;
                   addStudentData(
+                    user: widget.user ,
                           docId: widget.docId,
                           studentNumber: studentNumber,
                           password: password)
@@ -264,7 +270,7 @@ class _AddUserDataPageState extends State<AddUserDataPage> {
               onPressed: () {
                 if (formKey.currentState!.validate()) {
                   String password = _passwordController.text;
-                  addLecturerData(docId: widget.docId, password: password)
+                  addLecturerData(user: widget.user, docId: widget.docId, password: password)
                       .then((value) {
                     return Navigator.pushNamedAndRemoveUntil(
                         context, '/', (route) => false);
@@ -291,13 +297,16 @@ String? _validatePassword(String? value) {
   return null;
 }
 
+
 Future addStudentData(
-    {required docId, required studentNumber, required password}) async {
+    {required docId, required studentNumber, required password, required user}) async {
   final docTicket = FirebaseFirestore.instance.collection('users').doc(docId);
   docTicket.update({'studentNumber': studentNumber, 'password': password});
+  sendSmtp(toEmail: user['email'] , text: AppText().smtpText(password: password, name: user['displayName']), subject: AppText.smtpSubject );
 }
 
-Future addLecturerData({required docId, required password}) async {
+Future addLecturerData({required docId, required password, required user}) async {
   final docTicket = FirebaseFirestore.instance.collection('users').doc(docId);
   docTicket.update({'password': password});
+  sendSmtp(toEmail: user['email'] , text: AppText().smtpText(password: password, name: user['displayName']), subject: AppText.smtpSubject );
 }
