@@ -1,6 +1,6 @@
 # flutter_lecon
 
-A new Flutter project.
+A new Flutter project that dedicated to build a messaging system between lecturer and student.
 
 ## Getting Started
 
